@@ -7,19 +7,19 @@
 
 #ifndef PARTICLE_H_
 #define PARTICLE_H_
+#include "../Utils/Position.h"
+
 
 class Particle {
 	const double NRMALIZATION = 0.5;
-	double deltaX;
-	double deltaY;
-	double deltaYaw;
+	Position* position;
 	double belief;
 
 private:
 	double probByMov(double deltaX, double deltaY, double deltaYaw);
 	double prodByScan(double laser[]);
 public:
-	Particle();
+	Particle(double x, double y, double yaw);
 	void Update(double deltaX,double deltaY,double deltaYaw,double laser[]);
 	virtual ~Particle();
 };

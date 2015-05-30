@@ -7,9 +7,8 @@
 
 #include "Particle.h"
 
-Particle::Particle() {
-	// TODO Auto-generated constructor stub
-
+Particle::Particle(double x, double y, double yaw) {
+	this->position = new Position(x, y, yaw);
 }
 
 Particle::~Particle() {
