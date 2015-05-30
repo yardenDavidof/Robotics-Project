@@ -12,6 +12,7 @@
 
 class Particle {
 	const double NRMALIZATION = 0.5;
+	const int MAX_BELIEF = 1;
 	Position* position;
 	double belief;
 
