@@ -9,6 +9,7 @@
 #define PARTICLE_H_
 
 class Particle {
+	const double NRMALIZATION = 0.5;
 	double deltaX;
 	double deltaY;
 	double deltaYaw;
