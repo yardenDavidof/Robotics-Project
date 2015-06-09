@@ -7,10 +7,13 @@
 //============================================================================
 
 #include <iostream>
+#include "Managers/ConfigurationManager.h"
 using namespace std;
 
 int main() {
+	ConfigurationManager co = ConfigurationManager();
+	co.readConfFile();
 
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+
 	return 0;
 }
