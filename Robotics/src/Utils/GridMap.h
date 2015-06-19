@@ -15,14 +15,14 @@ public:
 	static const int FREE_CELL = 0;
 	static const int BLOCKED_CELL = 1;
 
-	static const int WIDTH_IN_CENTIMETERS = 1000;
-	static const int HEIGHT_IN_CENTIMETERS = 1000;
+	static const int WIDTH_IN_CENTIMETERS = 4;
+	static const int HEIGHT_IN_CENTIMETERS = 4;
 	static const int RESOLUTION_IN_CENTIMTERS = 10;
 	int gridMap[HEIGHT_IN_CENTIMETERS][WIDTH_IN_CENTIMETERS];
 	GridMap();
 //	void convertMapToGrid(std::vector<unsigned char> pixelMap );
 //	void convertMapToGrid(char& pixelMap);
-	void convertMapToGrid();
+	void convertMapToGrid(char **pixelMap);
 	virtual ~GridMap();
 };
 
