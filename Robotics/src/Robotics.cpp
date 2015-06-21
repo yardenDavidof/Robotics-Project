@@ -10,7 +10,7 @@
 #include "Managers/ConfigurationManager.h"
 #include "YardenMap.h"
 #include <map>
-#include "Movement/RoutePlaManager.h"
+#include "Movement/RoutePlanManager.h"
 #include <vector>
 
 using namespace std;
@@ -34,7 +34,7 @@ map <Position*, Position*> came_from;
 map <Position*, int> cost_so_far;
 
 
-RoutePlaManager* manager = new RoutePlaManager();
+RoutePlanManager* manager = new RoutePlanManager();
 manager->a_star_search(grid, start, goal,came_from,cost_so_far );
 
 

@@ -5,8 +5,8 @@
  *      Author: colman
  */
 
-#ifndef ROUTEPLAMANAGER_H_
-#define ROUTEPLAMANAGER_H_
+#ifndef ROUTEPLANMANAGER_H_
+#define ROUTEPLANMANAGER_H_
 
 #include <vector>
 #include "../Utils/PriorityQueue.h"
@@ -16,20 +16,20 @@
 
 using namespace std;
 
-class RoutePlaManager {
+class RoutePlanManager {
 
 
 
 private:
 
 public:
-	RoutePlaManager();
+	RoutePlanManager();
 	Position* getPointer(Position* pos, map<Position*, Position*>& came_from);
 	int heuristic(Position* first, Position* second);
 	void a_star_search(YardenMap grid, Position* start, Position* goal, map<Position*,Position*> &came_from, map<Position*, int> &cost_so_far );
 	bool isExist(vector<Position*> vec, Position* element);
 	vector<Position*> reconstruct_path(Position* start, Position* goal, map<Position*, Position*>& came_from);
-	virtual ~RoutePlaManager();
+	virtual ~RoutePlanManager();
 };
 
 #endif /* ROUTEPLAMANAGER_H_ */

@@ -5,17 +5,17 @@
  *      Author: colman
  */
 
-#include "RoutePlaManager.h"
+#include "RoutePlanManager.h"
 
-RoutePlaManager::RoutePlaManager() {
+RoutePlanManager::RoutePlanManager() {
 }
 
 
-int RoutePlaManager::heuristic(Position* first, Position* second){
+int RoutePlanManager::heuristic(Position* first, Position* second){
 	return abs(first->x - second->x) + abs(first->y - second->y);
 }
 
-bool RoutePlaManager::isExist(vector<Position*> vec, Position* element){
+bool RoutePlanManager::isExist(vector<Position*> vec, Position* element){
 	for (int i=0; i< vec.size(); i++){
 		if (vec[i]->x == element->x && vec[i]->y == element->y)
 			return true;
@@ -23,7 +23,7 @@ bool RoutePlaManager::isExist(vector<Position*> vec, Position* element){
 	return false;
 }
 
-void RoutePlaManager::a_star_search(YardenMap grid, Position* start, Position* goal, map<Position*,Position*> &came_from, map<Position*, int> &cost_so_far ){
+void RoutePlanManager::a_star_search(YardenMap grid, Position* start, Position* goal, map<Position*,Position*> &came_from, map<Position*, int> &cost_so_far ){
 	PriorityQueue frontier = PriorityQueue();
 	frontier.put(start,0);
 
@@ -59,7 +59,7 @@ void RoutePlaManager::a_star_search(YardenMap grid, Position* start, Position* g
 	   }
 }
 
-Position* RoutePlaManager::getPointer(Position* pos, map<Position*, Position*>& came_from){
+Position* RoutePlanManager::getPointer(Position* pos, map<Position*, Position*>& came_from){
 for (map<Position*,Position*>::iterator it = came_from.begin(); it != came_from.end(); ++it){
 	if (pos->x == it->first->x && pos->y == it->first->y){
 		return it->first;
@@ -69,7 +69,7 @@ return pos;
 }
 
 // TODO - find solution to the pointers
-vector<Position*> RoutePlaManager::reconstruct_path(Position* start, Position* goal, map<Position*, Position*>& came_from) {
+vector<Position*> RoutePlanManager::reconstruct_path(Position* start, Position* goal, map<Position*, Position*>& came_from) {
   vector<Position*> path;
   Position* current = goal;
   path.push_back(current);
@@ -80,6 +80,6 @@ vector<Position*> RoutePlaManager::reconstruct_path(Position* start, Position* g
   return path;
 }
 
-RoutePlaManager::~RoutePlaManager() {
+RoutePlanManager::~RoutePlanManager() {
 }
 
