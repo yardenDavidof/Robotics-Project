@@ -8,13 +8,43 @@
 #ifndef POSITION_H_
 #define POSITION_H_
 
+#include <iostream>
+
+using namespace std;
+
 class Position {
 public:
 	double x;
 	double y;
 	double yaw;
 	Position(double x, double y, double yaw);
+	Position(double x, double y);
+	Position();
+	void print() const;
 	virtual ~Position();
+
+	//TODO for the map in a* - check why we need it
+	bool operator<(const Position& secondPos) const
+    {
+		if (x < secondPos.x && y < secondPos.y)
+			return true;
+		return false;
+	}
+
+
+	bool operator==(const Position& secondPos) const
+    {
+		if (x == secondPos.x && y == secondPos.y)
+			return true;
+		return false;
+	}
+
+	bool operator!=(const Position& secondPos) const
+    {
+		if (x != secondPos.x || y != secondPos.y)
+			return true;
+		return false;
+	}
 };
 
 #endif /* POSITION_H_ */
