@@ -8,6 +8,10 @@
 #ifndef MAP_H_
 #define MAP_H_
 
+#include "../Helpers/lodepng.h"
+#include <iostream>
+using namespace std;
+
 class Map {
 private:
 	int mapSize;
