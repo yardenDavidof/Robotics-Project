@@ -15,7 +15,15 @@ YardenMap::YardenMap() {
 		}
 	}
 
-	map[3][3] = BLOCKED_CELL;
+	map[1][0] = BLOCKED_CELL;
+	map[1][1] = BLOCKED_CELL;
+	map[0][1] = BLOCKED_CELL;
+
+	map[5][3] = BLOCKED_CELL;
+	map[6][3] = BLOCKED_CELL;
+	map[7][3] = BLOCKED_CELL;
+	map[8][3] = BLOCKED_CELL;
+	map[9][3] = BLOCKED_CELL;
 	map[3][4] = BLOCKED_CELL;
 	map[5][5]= BLOCKED_CELL;
 	map[5][6] = BLOCKED_CELL;

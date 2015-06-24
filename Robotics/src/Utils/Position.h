@@ -23,7 +23,6 @@ public:
 	void print() const;
 	virtual ~Position();
 
-	//TODO for the map in a* - check why we need it
 	bool operator<(const Position& secondPos) const
     {
 		if (x < secondPos.x && y < secondPos.y)

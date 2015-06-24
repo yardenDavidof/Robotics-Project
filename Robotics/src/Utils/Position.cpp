@@ -14,6 +14,7 @@ Position::Position(double x, double y, double yaw) {
 
 }
 
+
 Position::Position(double x, double y) {
 	this->x = x;
 	this->y = y;

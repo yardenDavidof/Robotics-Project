@@ -24,8 +24,8 @@ int main() {
 
 
 	YardenMap grid;
-Position* start = new Position(4,5);
-Position* goal = new Position(9,6);
+Position* start = new Position(0,0);
+Position* goal = new Position(2,5);
 
 //path.push_back(start);
 //path.push_back(goal);

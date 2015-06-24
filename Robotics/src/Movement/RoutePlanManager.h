@@ -26,7 +26,7 @@ public:
 	RoutePlanManager();
 	Position* getPointer(Position* pos, map<Position*, Position*>& came_from);
 	int heuristic(Position* first, Position* second);
-	void a_star_search(YardenMap grid, Position* start, Position* goal, map<Position*,Position*> &came_from, map<Position*, int> &cost_so_far );
+	bool a_star_search(YardenMap grid, Position* start, Position* goal, map<Position*,Position*> &came_from, map<Position*, int> &cost_so_far );
 	bool isExist(vector<Position*> vec, Position* element);
 	vector<Position*> reconstruct_path(Position* start, Position* goal, map<Position*, Position*>& came_from);
 	virtual ~RoutePlanManager();

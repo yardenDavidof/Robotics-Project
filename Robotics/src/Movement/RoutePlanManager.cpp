@@ -23,7 +23,7 @@ bool RoutePlanManager::isExist(vector<Position*> vec, Position* element){
 	return false;
 }
 
-void RoutePlanManager::a_star_search(YardenMap grid, Position* start, Position* goal, map<Position*,Position*> &came_from, map<Position*, int> &cost_so_far ){
+bool RoutePlanManager::a_star_search(YardenMap grid, Position* start, Position* goal, map<Position*,Position*> &came_from, map<Position*, int> &cost_so_far ){
 	PriorityQueue frontier = PriorityQueue();
 	frontier.put(start,0);
 
@@ -41,6 +41,8 @@ void RoutePlanManager::a_star_search(YardenMap grid, Position* start, Position* 
 
 	    visitedCells.push_back(current.pos);
 	    vector<Position*> neighboors = grid.getNeighbours(current.pos);
+
+
 	    int new_cost = cost_so_far[current.pos] + 1;
 	    for (unsigned i = 0; i < neighboors.size(); i++){
 	    	Position* next = neighboors[i];

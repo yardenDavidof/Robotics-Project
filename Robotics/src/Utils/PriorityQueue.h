@@ -21,10 +21,6 @@ public:
 		Position* pos;
 		int priority;
 
-		Node(){
-
-		}
-		// TODO - check we need the minimum
 		bool operator>(const Node& secondNode) const
 	    {
 			if (priority > secondNode.priority)

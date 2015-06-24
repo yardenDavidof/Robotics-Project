@@ -12,6 +12,5 @@ Particle::Particle(double x, double y, double yaw) {
 }
 
 Particle::~Particle() {
-	// TODO Auto-generated destructor stub
 }
 

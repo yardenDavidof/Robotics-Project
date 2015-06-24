@@ -8,11 +8,9 @@
 #include "WaypointManager.h"
 
 WaypointManager::WaypointManager() {
-	// TODO Auto-generated constructor stub
 
 }
 
 WaypointManager::~WaypointManager() {
-	// TODO Auto-generated destructor stub
 }
 
