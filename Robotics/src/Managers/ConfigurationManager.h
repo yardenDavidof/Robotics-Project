@@ -10,13 +10,16 @@
 
 #include <fstream>
 #include <iostream>
+#include <cstring>
+#include <map>
 
 using namespace std;
 
 class ConfigurationManager {
 private:
-	const char* CONF_FILE_LOCATION = "/home/colman/git/Robotics-Project/Robotics/src/Resources/parameters.txt";//Resources/parameter.txt";
 
+	const char* CONF_FILE_LOCATION = "../Resources/parameters.txt";//"/home/colman/git/Robotics-Project/Robotics/src/Resources/parameters.txt";//Resources/parameter.txt";
+	map<string, string> dataMap;
 public:
 	ConfigurationManager();
 	void readConfFile();

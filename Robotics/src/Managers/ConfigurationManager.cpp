@@ -17,11 +17,18 @@ void ConfigurationManager::readConfFile(){
 //	  {
 	    while ( getline (myfile,line) )
 	    {
+
+	   	   std::size_t index = line.find(":");
+	   	   if (index != std::string::npos){
+
+	   		   std::string key = line.substr(0, index);
+	   		   std::string value = line.substr(index);
+	   		   dataMap[key]= value;
+	   	   }
+
 	      cout << line << '\n';
 	    }
 	    myfile.close();
-//	  }
-
 }
 
 

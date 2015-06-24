@@ -22,7 +22,7 @@ public:
 	GridMap();
 //	void convertMapToGrid(std::vector<unsigned char> pixelMap );
 //	void convertMapToGrid(char& pixelMap);
-	void convertMapToGrid(char **pixelMap);
+	void convertMapToGrid(char **pixelMap, int mapWidth, int mapHight);
 	virtual ~GridMap();
 };
 

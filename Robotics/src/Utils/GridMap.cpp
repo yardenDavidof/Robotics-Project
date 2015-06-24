@@ -16,12 +16,10 @@ GridMap::GridMap() {
 	}
 
 }
-void GridMap::convertMapToGrid(char **pixelMap){
-		int widthOfMap = 16;
-		int hightOfMap = 16;
+void GridMap::convertMapToGrid(char **pixelMap, int mapWidth, int mapHight){
 		char notGood = 'j';
-		for (int indexRow = 0; indexRow < hightOfMap; indexRow+=4){
-			for (int indexCol=0; indexCol < widthOfMap; indexCol+=4){
+		for (int indexRow = 0; indexRow < mapHight; indexRow+=4){
+			for (int indexCol=0; indexCol < mapWidth; indexCol+=4){
 				if (pixelMap[indexRow][indexCol] == notGood || pixelMap[indexRow][indexCol+1] == notGood || pixelMap[indexRow][indexCol+2] == notGood || pixelMap[indexRow][indexCol+3] == notGood ||
 					pixelMap[indexRow+1][indexCol] == notGood || pixelMap[indexRow+1][indexCol+1] == notGood || pixelMap[indexRow+1][indexCol+2] == notGood || pixelMap[indexRow+1][indexCol+3] == notGood ||
 					pixelMap[indexRow+2][indexCol] == notGood || pixelMap[indexRow+2][indexCol+1] == notGood || pixelMap[indexRow+2][indexCol+2] == notGood || pixelMap[indexRow+2][indexCol+3] == notGood ||
