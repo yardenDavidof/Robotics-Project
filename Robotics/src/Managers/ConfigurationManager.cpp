@@ -11,6 +11,11 @@ ConfigurationManager::ConfigurationManager() {
 	readConfFile();
 }
 
+ConfigurationManager* ConfigurationManager::getInstance(){
+	static ConfigurationManager instance;
+	return &instance;
+}
+
 string ConfigurationManager::getMapPath(){
 	return dataMap["map"];
 }

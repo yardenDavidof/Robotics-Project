@@ -22,9 +22,13 @@ private:
 	const char* CONF_FILE_LOCATION = "src/Resources/parameters.txt";
 	map<string, string> dataMap;
 
+
+	ConfigurationManager();
+	ConfigurationManager(ConfigurationManager const&);   // Don't Implement.
+	        void operator=(ConfigurationManager const&); // Don't implement
 	void readConfFile();
 public:
-	ConfigurationManager();
+	static ConfigurationManager* getInstance();
 	string getMapPath();
 	int getRobotWidth();
 	int getRobotHeight();
