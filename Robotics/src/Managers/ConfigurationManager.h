@@ -12,17 +12,25 @@
 #include <iostream>
 #include <cstring>
 #include <map>
+#include <unistd.h>
+#include <stdlib.h>
 
 using namespace std;
 
 class ConfigurationManager {
 private:
-
-	const char* CONF_FILE_LOCATION = "../Resources/parameters.txt";//"/home/colman/git/Robotics-Project/Robotics/src/Resources/parameters.txt";//Resources/parameter.txt";
+	const char* CONF_FILE_LOCATION = "src/Resources/parameters.txt";
 	map<string, string> dataMap;
+
+	void readConfFile();
 public:
 	ConfigurationManager();
-	void readConfFile();
+	string getMapPath();
+	int getRobotWidth();
+	int getRobotHeight();
+	double getMapResolutionCM();
+	double getGridResolutionCM();
+
 	virtual ~ConfigurationManager();
 };
 
