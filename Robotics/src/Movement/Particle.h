@@ -7,12 +7,12 @@
 
 #ifndef PARTICLE_H_
 #define PARTICLE_H_
-#include "../Utils/Position.h"
+#include "../Utils/Location.h"
 
 
 class Particle {
 	const double NRMALIZATION = 0.5;
-	Position* position;
+	Location::Position* position;
 	double belief;
 
 private:

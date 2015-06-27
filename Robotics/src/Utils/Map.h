@@ -18,10 +18,14 @@ class Map {
 private:
 	std::vector<unsigned char> originalImage;
 	std::vector<unsigned char> imageWeight;
+	unsigned width;
+	unsigned height;
 public:
 	Map();
-	int* getGrid();
-
+	std::vector<unsigned char> getOriginalMap();
+	std::vector<unsigned char> getWeightMap();
+	unsigned getMapWidth();
+	unsigned getMapHight();
 
 	void readPNG();
 

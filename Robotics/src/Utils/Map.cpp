@@ -8,13 +8,26 @@
 #include "Map.h"
 
 Map::Map() {
-	// TODO Auto-generated constructor stub
+}
 
+std::vector<unsigned char> Map::getOriginalMap(){
+	return originalImage;
+}
+
+std::vector<unsigned char> Map::getWeightMap(){
+	return imageWeight;
+}
+
+unsigned Map::getMapWidth(){
+	return width;
+}
+
+unsigned Map::getMapHight(){
+	return height;
 }
 
  void Map::readPNG(){
 
-		unsigned width, height;
 		unsigned x, y;
 		string filename = ConfigurationManager::getInstance()->getMapPath();//"/home/colman/Documents/manorRoboticsProject/roboticLabMap.png";
 		char* secFilename = "/home/colman/Desktop/newMap.png";
