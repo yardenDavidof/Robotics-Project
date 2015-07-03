@@ -50,6 +50,14 @@ GridMap::GridMap(){
 GridMap::GridMap(int width, int height) {
 	mapHeight = height;
 	mapWidth = width;
+
+	// define rows
+	gridMap = new int*[mapHeight];
+
+	// defines columns
+	for (int index = 0; index < mapHeight; index++){
+		gridMap[index] = new int[mapWidth];
+	}
 	for (int i=0; i<mapHeight/RESOLUTION/4; i++){
 		for (int j=0; j<mapWidth/RESOLUTION/4; j++){
 			gridMap[i][j]=-1;
@@ -58,33 +66,29 @@ GridMap::GridMap(int width, int height) {
 }
 
 void GridMap::convertMapToGrid(std::vector<unsigned char> pixelMap){
-	for (int indexHeight = 0; indexHeight < mapHeight/RESOLUTION; indexHeight++){
-		for(int indexWidth = 0; indexWidth < mapWidth/RESOLUTION; indexWidth++)
-		{
-			if (!(pixelMap[indexHeight * mapWidth * 4 + mapHeight * 4 + 0]
-				|| pixelMap[indexHeight * mapWidth * 4 + mapHeight * 4 + 1]
-				|| pixelMap[indexHeight * mapWidth * 4 + mapHeight * 4 + 2]))
-			{
-			}
+	// Passing the grid cells
+	for (int gridHeightIndex = 0; gridHeightIndex < mapHeight/RESOLUTION; gridHeightIndex++){
+		for (int gridWidthIndex = 0; gridWidthIndex < mapWidth/RESOLUTION; gridWidthIndex++){
+			bool isCurrentCelIsFree = true;
 
-
-
-		char notGood = 0;
-		for (int indexRow = 0; indexRow < mapHeight; indexRow= indexRow +RESOLUTION){
-			for (int indexCol=0; indexCol < mapWidth; indexCol= indexCol + RESOLUTION){
-				if (pixelMap[indexRow + indexCol] == notGood || pixelMap[indexRow + indexCol+1] == notGood || pixelMap[indexRow + indexCol+2] == notGood || pixelMap[indexRow + indexCol+3] == notGood ||
-					pixelMap[indexRow+1 + indexCol] == notGood || pixelMap[indexRow+1 + indexCol+1] == notGood || pixelMap[indexRow+1 + indexCol+2] == notGood || pixelMap[indexRow+1 + indexCol+3] == notGood ||
-					pixelMap[indexRow+2 + indexCol] == notGood || pixelMap[indexRow+2 + indexCol+1] == notGood || pixelMap[indexRow+2 + indexCol+2] == notGood || pixelMap[indexRow+2 + indexCol+3] == notGood ||
-					pixelMap[indexRow+3 + indexCol] == notGood || pixelMap[indexRow+3 + indexCol+1] == notGood || pixelMap[indexRow+3 + indexCol+2] == notGood || pixelMap[indexRow+3 + indexCol+3] == notGood){
-					gridMap[indexRow/RESOLUTION][indexCol/RESOLUTION] = GridMap::BLOCKED_CELL;
-				} else {
-					gridMap[indexRow/RESOLUTION][indexCol/RESOLUTION] = GridMap::FREE_CELL;
+			// Passing the cells refer to this map (4X4-> 16X16)
+			for (int mapHeightIndex = gridHeightIndex*16; mapHeightIndex < (gridHeightIndex*16+4 )&& isCurrentCelIsFree; mapHeightIndex = mapHeightIndex + 1){
+				for (int mapWidthIndex = gridWidthIndex*16; mapWidthIndex < (gridWidthIndex * 16 +16) && isCurrentCelIsFree; mapWidthIndex = mapWidthIndex + 4){
+					if(! (pixelMap[mapHeightIndex * mapWidth  + mapWidthIndex   + 0]
+					    || pixelMap[mapHeightIndex * mapWidth + mapWidthIndex   + 1]
+					    || pixelMap[mapHeightIndex * mapWidth + mapWidthIndex + 2])){
+						isCurrentCelIsFree = false;
+					}
 				}
 			}
-		}
-		}
 
-}
+			if (isCurrentCelIsFree){
+				gridMap[gridHeightIndex][gridWidthIndex] = GridMap::FREE_CELL;
+			} else {
+				gridMap[gridHeightIndex][gridWidthIndex] = GridMap::BLOCKED_CELL;
+			}
+		}
+	}
 }
 
 vector<Location*> GridMap::getNeighbours(Location* location){
