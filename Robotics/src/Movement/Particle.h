@@ -8,6 +8,8 @@
 #ifndef PARTICLE_H_
 #define PARTICLE_H_
 #include "../Utils/Location.h"
+#include <cmath>
+#include <math.h>
 
 
 class Particle {
@@ -21,6 +23,7 @@ private:
 public:
 	Particle(double x, double y, double yaw);
 	void Update(double deltaX,double deltaY,double deltaYaw,double laser[]);
+	double getBelief();
 	virtual ~Particle();
 };
 

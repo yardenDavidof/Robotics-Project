@@ -9,13 +9,12 @@
 #define LOCATION_H_
 
 class Location {
-	struct Position{
-		double yaw;
-		Location* location;
-		Position(double x, double y, double yaw) : location(new Location(x,y)), yaw(yaw){}
-	};
-
 public:
+	struct Position{
+			double yaw;
+			Location* location;
+			Position(double x, double y, double yaw) : location(new Location(x,y)), yaw(yaw){}
+		};
 	double x;
 	double y;
 
