@@ -19,19 +19,20 @@ class GridMap {
 private:
 	int mapWidth;
 	int mapHeight;
+	int gridHeight;
+	int gridWidth;
 public:
 	static const int FREE_CELL = 0;
 	static const int BLOCKED_CELL = 1;
 	static const int PATH_CELL = 2;
 	static const int VISITED_CELL = 3;
 
-//	static const int WIDTH_IN_CENTIMETERS = ConfigurationManager::getInstance()->;
-//	static const int HEIGHT_IN_CENTIMETERS = 4;
 	const  int RESOLUTION = ConfigurationManager::getInstance()->getGridResolutionCM()/ ConfigurationManager::getInstance()->getMapResolutionCM();
-//	int gridMap[HEIGHT_IN_CENTIMETERS][WIDTH_IN_CENTIMETERS];
 	int** gridMap;
 	GridMap(int mapWidth, int mapHight);
 	GridMap();
+	int getGridWidth();
+	int getGridHeight();
 	void convertMapToGrid(std::vector<unsigned char> pixelMap);
 	vector<Location*> getNeighbours(Location* pos);
 	bool inBounds(Location* pos);

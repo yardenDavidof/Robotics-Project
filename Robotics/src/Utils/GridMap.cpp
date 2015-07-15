@@ -51,32 +51,43 @@ GridMap::GridMap(int width, int height) {
 	mapHeight = height;
 	mapWidth = width;
 
+	gridHeight = mapHeight/RESOLUTION;
+	gridWidth = mapWidth/RESOLUTION;
+
 	// define rows
-	gridMap = new int*[mapHeight];
+	gridMap = new int*[gridHeight];
 
 	// defines columns
-	for (int index = 0; index < mapHeight; index++){
-		gridMap[index] = new int[mapWidth];
+	for (int index = 0; index < gridHeight; index++){
+		gridMap[index] = new int[gridWidth];
 	}
-	for (int i=0; i<mapHeight/RESOLUTION/4; i++){
-		for (int j=0; j<mapWidth/RESOLUTION/4; j++){
+	for (int i=0; i<gridHeight; i++){
+		for (int j=0; j<gridWidth; j++){
 			gridMap[i][j]=-1;
 		}
 	}
 }
 
+int GridMap::getGridWidth(){
+	return gridWidth;
+}
+
+int GridMap::getGridHeight(){
+	return gridHeight;
+}
+
 void GridMap::convertMapToGrid(std::vector<unsigned char> pixelMap){
 	// Passing the grid cells
-	for (int gridHeightIndex = 0; gridHeightIndex < mapHeight/RESOLUTION; gridHeightIndex++){
-		for (int gridWidthIndex = 0; gridWidthIndex < mapWidth/RESOLUTION; gridWidthIndex++){
+	for (int gridHeightIndex = 0; gridHeightIndex <  gridHeight; gridHeightIndex++){
+		for (int gridWidthIndex = 0; gridWidthIndex < gridWidth; gridWidthIndex++){
 			bool isCurrentCelIsFree = true;
 
 			// Passing the cells refer to this map (4X4-> 16X16)
-			for (int mapHeightIndex = gridHeightIndex*16; mapHeightIndex < (gridHeightIndex*16+4 )&& isCurrentCelIsFree; mapHeightIndex = mapHeightIndex + 1){
-				for (int mapWidthIndex = gridWidthIndex*16; mapWidthIndex < (gridWidthIndex * 16 +16) && isCurrentCelIsFree; mapWidthIndex = mapWidthIndex + 4){
-					if(! (pixelMap[mapHeightIndex * mapWidth  + mapWidthIndex   + 0]
-					    || pixelMap[mapHeightIndex * mapWidth + mapWidthIndex   + 1]
-					    || pixelMap[mapHeightIndex * mapWidth + mapWidthIndex + 2])){
+			for (int mapHeightIndex = gridHeightIndex*4; mapHeightIndex < (gridHeightIndex*4 + 4 ) && isCurrentCelIsFree; mapHeightIndex++){
+				for (int mapWidthIndex = gridWidthIndex*16; mapWidthIndex < (gridWidthIndex *16 + 16) && isCurrentCelIsFree; mapWidthIndex +=  4){
+					if(! (pixelMap[mapHeightIndex * mapWidth * 4  + mapWidthIndex + 0]
+					    || pixelMap[mapHeightIndex * mapWidth * 4 + mapWidthIndex + 1]
+					    || pixelMap[mapHeightIndex * mapWidth * 4 + mapWidthIndex + 2])){
 						isCurrentCelIsFree = false;
 					}
 				}
