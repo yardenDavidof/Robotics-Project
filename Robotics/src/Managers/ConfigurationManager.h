@@ -14,6 +14,7 @@
 #include <map>
 #include <unistd.h>
 #include <stdlib.h>
+#include "../Utils/Location.h"
 
 using namespace std;
 
@@ -21,8 +22,8 @@ class ConfigurationManager {
 private:
 	const char* CONF_FILE_LOCATION = "src/Resources/parameters.txt";
 	map<string, string> dataMap;
-
-
+	Location* getStartLocation();
+	Location* getGoalLocation();
 	ConfigurationManager();
 	ConfigurationManager(ConfigurationManager const&);   // Don't Implement.
 	        void operator=(ConfigurationManager const&); // Don't implement
@@ -34,6 +35,8 @@ public:
 	int getRobotHeight();
 	double getMapResolutionCM();
 	double getGridResolutionCM();
+	Location* getStartLocationInGrid();
+	Location* getGoalLocationInGrid();
 
 	virtual ~ConfigurationManager();
 };

@@ -30,6 +30,17 @@ int ConfigurationManager::getRobotHeight(){
 	return height;
 }
 
+Location* ConfigurationManager::getStartLocationInGrid(){
+	Location* mapLocation = this->getStartLocation();
+	return new Location(mapLocation->x/4, mapLocation->y/4);
+}
+
+Location* ConfigurationManager::getGoalLocationInGrid(){
+	Location* mapLocation = this->getGoalLocation();
+	return new Location(mapLocation->x/4, mapLocation->y/4);
+}
+
+
 int ConfigurationManager::getRobotWidth(){
 	int width = 0;
 	string size = dataMap["robotSize"];
@@ -65,6 +76,33 @@ void ConfigurationManager::readConfFile(){
 
 	    }
 	    myfile.close();
+}
+
+Location* ConfigurationManager::getStartLocation(){
+	double x,y,yaw;
+	string totalLocation = dataMap["startLocation"].c_str();
+	 std::size_t index = totalLocation.find(" ");
+	 if (index != std::string::npos){
+	   x = atof(totalLocation.substr(0, index).c_str());
+	   std::string continueString = totalLocation.substr(index + 1);
+	   index = continueString.find(" ");
+	   y = atof(continueString.substr(0, index).c_str());
+	   yaw = atof(continueString.substr(index + 1).c_str());
+	 }
+
+	 return new Location(x, y);
+}
+
+Location* ConfigurationManager::getGoalLocation(){
+	double x,y,yaw;
+	string totalGoal = dataMap["goal"].c_str();
+	 std::size_t index = totalGoal.find(" ");
+	 if (index != std::string::npos){
+	   x = atof(totalGoal.substr(0, index).c_str());
+	   y = atof(totalGoal.substr(index + 1).c_str());
+	 }
+
+	 return new Location(x, y);
 }
 
 
