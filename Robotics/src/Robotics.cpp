@@ -19,23 +19,24 @@ int main() {
 	GridMap originGrid( map.getMapWidth(), map.getMapHight());
 	originGrid.convertMapToGrid(map.getOriginalMap());
 
-//	GridMap weightGrid( map.getMapWidth(), map.getMapHight());
-//	weightGrid.convertMapToGrid(map.getWeightMap());
-	for (int i=0; i<95;i++){
-		for(int j=0; j<137;j++){
-			cout<<originGrid.gridMap[i][j];
-		}
-		cout<<endl;
-	}
+	GridMap weightGrid( map.getMapWidth(), map.getMapHight());
+	weightGrid.convertMapToGrid(map.getWeightMap());
 
-//
+//	for (int i=0; i< originGrid.getGridHeight();i++){
+//		for(int j=0; j<originGrid.getGridWidth();j++){
+//			cout<<originGrid.gridMap[i][j];
+//		}
+//		cout<<endl;
+//	}
+
+
 //GridMap grid= GridMap();
-//Location* start = new Location(1,1);
-//Location* goal = new Location(1,13);
-//
-//RoutePlanManager* plan = new RoutePlanManager();
-//vector<Location*> path = plan->a_star_search(grid,start,goal);
-//
-//grid.drawGrid(path);
+Location* start = ConfigurationManager::getInstance()->getStartLocationInGrid();//new Location(1,1);
+Location* goal = ConfigurationManager::getInstance()->getGoalLocationInGrid();//new Location(1,13);
+
+RoutePlanManager* plan = new RoutePlanManager();
+vector<Location*> path = plan->a_star_search(weightGrid,start,goal);
+
+weightGrid.drawGrid(path);
 	return 0;
 }
