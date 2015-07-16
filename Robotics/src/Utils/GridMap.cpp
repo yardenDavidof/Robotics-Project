@@ -157,6 +157,14 @@ void GridMap::drawGrid(vector<Location> path){
 		}
 }
 
+int GridMap::getMapWidth(){
+	return mapWidth;
+}
+
+int GridMap::getMapHeight(){
+	return mapHeight;
+}
+
 GridMap::~GridMap() {
 }
 

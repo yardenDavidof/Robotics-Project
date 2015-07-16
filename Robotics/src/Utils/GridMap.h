@@ -33,6 +33,8 @@ public:
 	GridMap();
 	int getGridWidth();
 	int getGridHeight();
+	int getMapWidth();
+	int getMapHeight();
 	void convertMapToGrid(std::vector<unsigned char> pixelMap);
 	vector<Location*> getNeighbours(Location* pos);
 	bool inBounds(Location* pos);

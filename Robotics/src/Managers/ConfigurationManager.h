@@ -25,8 +25,7 @@ private:
 	Location* getStartLocation();
 	Location* getGoalLocation();
 	ConfigurationManager();
-	ConfigurationManager(ConfigurationManager const&);   // Don't Implement.
-	        void operator=(ConfigurationManager const&); // Don't implement
+
 	void readConfFile();
 public:
 	static ConfigurationManager* getInstance();
