@@ -32,12 +32,12 @@ int ConfigurationManager::getRobotHeight(){
 
 Location* ConfigurationManager::getStartLocationInGrid(){
 	Location* mapLocation = this->getStartLocation();
-	return new Location(mapLocation->x/4, mapLocation->y/4);
+	return new Location((int)mapLocation->x/4, (int)mapLocation->y/4);
 }
 
 Location* ConfigurationManager::getGoalLocationInGrid(){
 	Location* mapLocation = this->getGoalLocation();
-	return new Location(mapLocation->x/4, mapLocation->y/4);
+	return new Location((int)mapLocation->x/4, (int)mapLocation->y/4);
 }
 
 
@@ -83,10 +83,10 @@ Location* ConfigurationManager::getStartLocation(){
 	string totalLocation = dataMap["startLocation"].c_str();
 	 std::size_t index = totalLocation.find(" ");
 	 if (index != std::string::npos){
-	   x = atof(totalLocation.substr(0, index).c_str());
+	   y = atof(totalLocation.substr(0, index).c_str());
 	   std::string continueString = totalLocation.substr(index + 1);
 	   index = continueString.find(" ");
-	   y = atof(continueString.substr(0, index).c_str());
+	   x = atof(continueString.substr(0, index).c_str());
 	   yaw = atof(continueString.substr(index + 1).c_str());
 	 }
 
@@ -98,8 +98,8 @@ Location* ConfigurationManager::getGoalLocation(){
 	string totalGoal = dataMap["goal"].c_str();
 	 std::size_t index = totalGoal.find(" ");
 	 if (index != std::string::npos){
-	   x = atof(totalGoal.substr(0, index).c_str());
-	   y = atof(totalGoal.substr(index + 1).c_str());
+	   y = atof(totalGoal.substr(0, index).c_str());
+	   x = atof(totalGoal.substr(index + 1).c_str());
 	 }
 
 	 return new Location(x, y);
