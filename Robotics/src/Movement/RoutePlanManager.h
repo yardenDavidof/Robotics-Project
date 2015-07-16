@@ -20,10 +20,11 @@ class RoutePlanManager {
 
 public:
 	RoutePlanManager();
-	Location* getPointer(Location* pos, map<Location*, Location*>& came_from);
 	int heuristic(Location* first, Location* second);
-	vector<Location*> a_star_search(GridMap grid, Location* start, Location* goal);
-	vector<Location*> reconstruct_path(Location* start, Location* goal, map<Location*, Location*>& came_from);
+	void printCameFrom(map<Location,Location*>&came_from);
+	vector<Location> a_star_search(GridMap grid, Location* start, Location* goal);
+	vector<Location> reconstruct_path(Location* start, Location* goal, map<Location, Location*>& came_from);
+	Location* getValue(map<Location,Location*>& came_from, Location key);
 	virtual ~RoutePlanManager();
 };
 

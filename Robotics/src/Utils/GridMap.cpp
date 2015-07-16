@@ -127,7 +127,7 @@ bool GridMap::isCellVisited(Location* location){
 bool GridMap::inBounds(Location* location){
 
 	//TODO - check height + width
-	  return 0 <= location->x && location->x < mapWidth && 0 <= location->y && location->y < mapHeight;
+	  return 0 <= location->x && location->x < gridHeight && 0 <= location->y && location->y < gridWidth;
 }
 
 bool GridMap::passable(Location* location){
@@ -136,15 +136,15 @@ bool GridMap::passable(Location* location){
 		return true;
 }
 
-void GridMap::drawGrid(vector<Location*> path){
+void GridMap::drawGrid(vector<Location> path){
 	for (unsigned i =0; i< path.size(); i++){
-			Location* current = path[i];
-			gridMap[(int)current->x][(int)current->y] = PATH_CELL;
+			Location current = path[i];
+			gridMap[(int)current.x][(int)current.y] = PATH_CELL;
 		}
 
 	//TODO - check what is the height + width of grid
-		for (int i = 0; i < mapHeight; i++){
-			for (int j = 0; j < mapWidth; j++){
+		for (int i = 0; i < gridHeight; i++){
+			for (int j = 0; j < gridWidth; j++){
 				// TODO - how to clean the grid from visited cells
 				if (gridMap[i][j] == FREE_CELL || gridMap[i][j] == VISITED_CELL)
 					cout << "." << "  ";

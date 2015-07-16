@@ -12,6 +12,11 @@ Location::Location(double xPos, double yPos) {
 	y = yPos;
 }
 
+Location::Location(Location* loc){
+	x = loc->x;
+	y = loc->y;
+}
+
 Location::~Location() {
 	// TODO Auto-generated destructor stub
 }

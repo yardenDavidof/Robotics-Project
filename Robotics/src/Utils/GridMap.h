@@ -37,7 +37,7 @@ public:
 	vector<Location*> getNeighbours(Location* pos);
 	bool inBounds(Location* pos);
 	bool passable(Location* pos);
-	void drawGrid(vector<Location*> path);
+	void drawGrid(vector<Location> path);
 	void setCellVisited(Location* location);
 	bool isCellVisited(Location* location);
 

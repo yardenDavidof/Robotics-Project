@@ -15,15 +15,15 @@ int RoutePlanManager::heuristic(Location* first, Location* second){
 	return abs(first->x - second->x) + abs(first->y - second->y);
 }
 
-vector<Location*> RoutePlanManager::a_star_search(GridMap grid, Location* start, Location* goal){
-	map<Location*,Location*> came_from;
+vector<Location> RoutePlanManager::a_star_search(GridMap grid, Location* start, Location* goal){
+	map<Location,Location*> came_from;
 	map<Location*, int> cost_so_far;
 
 	PriorityQueue frontier = PriorityQueue();
 	frontier.put(start,0);
 
 	cost_so_far.insert(pair<Location*,int>(start,0));
-	came_from.insert(pair<Location*,Location*>(start,start));
+	came_from.insert(pair<Location,Location*>(*start,start));
 
 	  while (!frontier.isEmpty()) {
 		  PriorityQueue::Node current = frontier.get();
@@ -44,32 +44,42 @@ vector<Location*> RoutePlanManager::a_star_search(GridMap grid, Location* start,
 	    		grid.setCellVisited(next);
 	    		int priority = new_cost + heuristic(next, goal);
 	    		frontier.put(next, priority);
-	    		came_from[next] = current.pos;
+	    		came_from.insert(make_pair(*next,current.pos));
 	    	}
 	    }
 	   }
 
-	  return vector<Location*>();
+	  return vector<Location>();
 }
 
-Location* RoutePlanManager::getPointer(Location* pos, map<Location*, Location*>& came_from){
-for (map<Location*,Location*>::iterator it = came_from.begin(); it != came_from.end(); ++it){
-	if (pos == it->first){
-		return it->first;
+
+// TODO - delete
+void RoutePlanManager::printCameFrom(map<Location,Location*>& came_from){
+	for(map<Location, Location* >::const_iterator it = came_from.begin();it != came_from.end(); ++it)
+		{
+		    std::cout << it->first.x << "," << it->first.y << " <-- " << it->second->x << "," << it->second->y << endl;
+		}
+}
+
+Location* RoutePlanManager::getValue(map<Location,Location*>& came_from, Location key){
+	for(map<Location, Location* >::const_iterator it = came_from.begin();it != came_from.end(); ++it){
+		if(it->first == key)
+			return it->second;
 	}
-}
-return pos;
+	return NULL;
 }
 
-// TODO - find solution to the pointers
-vector<Location*> RoutePlanManager::reconstruct_path(Location* start, Location* goal, map<Location*, Location*>& came_from) {
-  vector<Location*> path;
-  Location* current = goal;
+vector<Location> RoutePlanManager::reconstruct_path(Location* start, Location* goal, map<Location, Location*>& came_from) {
+  vector<Location> path;
+  Location current = *goal;
   path.push_back(current);
-  while (*current != *start) {
-    current = came_from[getPointer(current,came_from)];
+
+  while (current != *start) {
+	// TODO - why cant find
+	current = *getValue(came_from,current);
     path.push_back(current);
   }
+
   return path;
 }
 
