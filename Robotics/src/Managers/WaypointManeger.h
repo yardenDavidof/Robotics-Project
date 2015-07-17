@@ -10,6 +10,9 @@
 
 #include <vector>
 #include "../Utils/Location.h"
+#include "../Movement/WaypointDriver.h"
+#include "../Movement/ParticleManager.h"
+#include "../Behaviors/Behavior.h"
 
 #define READINGS_NUM 682
 
@@ -19,6 +22,7 @@ class WaypointManeger {
 	vector<Location> waypoints;
 	WaypointDriver driver;
 	ParticleManager* particleManager;
+	Behavior* behavior;
 
 public:
 	WaypointManeger(vector<Location> path);

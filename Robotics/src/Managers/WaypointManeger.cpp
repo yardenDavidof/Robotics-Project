@@ -7,12 +7,12 @@
 
 #include "WaypointManeger.h"
 
-WaypointManeger::WaypointManeger(vector<Location> path):waypoints(path), driver(new WaypointDriver()),particleManager(new ParticleManager()) {}
+//WaypointManeger::WaypointManeger(vector<Location> path):waypoints(path), driver(new WaypointDriver()),particleManager(new ParticleManager()) {}
 
 void WaypointManeger::run(){
-
-	double readings[READINGS_NUM];
-
+//
+//	double readings[READINGS_NUM];
+//
 //	behavior->read(readings);
 //
 //	slamManager->update(new Position(), readings);

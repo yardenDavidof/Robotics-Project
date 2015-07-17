@@ -16,10 +16,10 @@ LocalizationManager::LocalizationManager(GridMap gridMap, double yawRobot) {
 	}
 }
 
-LocalizationManager* LocalizationManager::getInstance(){
-	static LocalizationManager instance;
-	return &instance;
-}
+//LocalizationManager* LocalizationManager::getInstance(){
+//	static LocalizationManager instance;
+//	return &instance;
+//}
 
 LocalizationManager::~LocalizationManager() {
 	// TODO Auto-generated destructor stub

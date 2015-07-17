@@ -14,13 +14,14 @@
 
 using namespace std;
 
+// TODO - maybe do singleton
 class LocalizationManager {
 	GridMap grid;
 	LocalizationManager(GridMap gridMap, double yawRobot);
-	LocalizationManager(LocalizationManager const&);   // Don't Implement.
-		        void operator=(LocalizationManager const&); // Don't implement
+//	LocalizationManager(LocalizationManager const&);   // Don't Implement.
+//		        void operator=(LocalizationManager const&); // Don't implement
 public:
-    static LocalizationManager* getInstance();
+//    static LocalizationManager* getInstance();
 	static const int PARTICLE_NUM = 50;
 	std::vector<Particle> particles;
 

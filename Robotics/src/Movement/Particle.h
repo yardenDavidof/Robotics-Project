@@ -7,8 +7,9 @@
 
 #ifndef PARTICLE_H_
 #define PARTICLE_H_
-#include "../Utils/Location.h"
+#include "../Utils/Position.h"
 #include "../ILadyRobot.h"
+#include "../Utils/GridMap.h"
 
 #include <cmath>
 #include <math.h>
@@ -18,13 +19,13 @@
 
 class Particle {
 	static const double NRMALIZATION = 0.5;
-	Location::Position* position;
+	Position* position;
 	double belief;
 
 
 private:
 	double probByMov(double deltaX, double deltaY, double deltaYaw);
-	double prodByScan(Location::Position* delta, double laser[],GridMap grid);
+	double prodByScan(Position* delta, double laser[],GridMap grid);
 public:
 	Particle(double x, double y, double yaw);
 	void Update(double deltaX,double deltaY,double deltaYaw,double laser[], GridMap grid);

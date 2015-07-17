@@ -9,6 +9,7 @@
 #define BEHAVIORMANAGER_H_
 
 #define BEHAVIORS_SIZE 8
+#define READINGS_NUM
 #define FORWARD 0
 #define BACKWARD  1
 #define RIGHT 2
@@ -18,13 +19,19 @@
 #define DIAGONAL_DOWN_RIGHT 6
 #define DIAGONAL_DOWN_LEFT 7
 
+#define READINGS_NUM 682
+
 
 class BehaviorManager {
 private:
 	ILadyRobot* ladyRobot;
 	Behavior* behaviors[BEHAVIORS_SIZE];
+	ParticleManager* particleManager;
+
+	void read(double* readings);
+	Behavior* getNextBehavior(Behavior* behavior);
 public:
-	BehaviorManager(ILadyRobot* ladyRobot);
+	BehaviorManager(ILadyRobot* ladyRobot, ParticleManager* particleManager);
 	void run();
 	virtual ~BehaviorManager();
 };

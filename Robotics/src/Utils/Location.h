@@ -10,17 +10,7 @@
 
 class Location {
 public:
-	struct Position{
-			double yaw;
-			Location* location;
-			Position(double x, double y, double yaw) : location(new Location(x,y)), yaw(yaw){}
-			int getX(){return location->x;}
-			int getY(){return location->y;}
-			int getYaw(){return yaw;}
-			void setX(double setX){location->x = setX;}
-			void setY(double setY){location->y = setY;}
-			void setYaw(double setYaw){yaw = setX;}
-		};
+
 	double x;
 	double y;
 

@@ -7,12 +7,21 @@
 
 #include "Behavior.h"
 
-Behavior::Behavior() {
-	// TODO Auto-generated constructor stub
+Behavior::Behavior(ILadyRobot* ladyRobot):ladyRobot(ladyRobot){}
 
+void Behavior::behave(double speed, double yaw){
+	ladyRobot->setSpeed(speed, yaw);
+//	turnAngle = 0.0;
+}
+
+//get laser reading
+void Behavior::read(double* readings) {
+	ladyRobot->read();
+	for (int i = 0; i < READINGS_NUM; i++){
+		readings[i] = ladyRobot->getRange(i);
+	}
 }
 
 Behavior::~Behavior() {
-	// TODO Auto-generated destructor stub
 }
 

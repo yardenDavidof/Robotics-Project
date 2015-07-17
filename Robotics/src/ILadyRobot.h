@@ -12,26 +12,27 @@
 #define LASER_RANGE 4
 
 #include <libplayerc++/playerc++.h>
-#include "Utils/Location.h"
+#include "Utils/Position.h"
 
 using namespace std;
-//using namespace PlayerCc;
+using namespace PlayerCc;
 
 
 class ILadyRobot {
 private:
 
-//	PlayerClient* playerClient;
-//	Position2dProxy* position2dProxy;
-//	LaserProxy* laser;
+	PlayerClient* playerClient;
+	Position2dProxy* position2dProxy;
+	LaserProxy* laser;
 	void cleanCache();
+
 public:
 	ILadyRobot(char* ip, int port);
 	void read();
 	double getYaw();
 	double getXPosition();
 	double getYPosition();
-	Location::Position* getPosition();
+	Position* getPosition();
 	void setSpeed(double speed, double yaw);
 	double getRange(int index);
 
