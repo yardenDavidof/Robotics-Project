@@ -11,6 +11,8 @@
 #include "Utils/Map.h"
 #include "Utils/GridMap.h"
 #include  "Movement/RoutePlanManager.h"
+#include "ILadyRobot.h"
+#include "Managers/WaypointManeger.h"
 using namespace std;
 
 int main() {
@@ -22,15 +24,16 @@ int main() {
 	GridMap weightGrid( map.getMapWidth(), map.getMapHight());
 	weightGrid.convertMapToGrid(map.getWeightMap());
 
-	Location* start = ConfigurationManager::getInstance()->getStartLocationInGrid();//new Location(1,1);
-	Location* goal = ConfigurationManager::getInstance()->getGoalLocationInGrid();//new Location(1,13);
+	Location* start = ConfigurationManager::getInstance()->getStartLocationInGrid()->getLocation();
+	Location* goal = ConfigurationManager::getInstance()->getGoalLocationInGrid();
 
 	RoutePlanManager* plan = new RoutePlanManager();
 	vector<Location> path = plan->a_star_search(weightGrid,start,goal);
-//
-//	ILadyRobot ladyRobot("localhost", 6665);
-//	WaypointManeger manager(&ladyRobot);
-//	manager.run();
+
+	ILadyRobot ladyRobot("localhost", 6665);
+	WaypointManeger manager(path, &ladyRobot, &originGrid);
+	manager.run();
+
 
 	weightGrid.drawGrid(path);
 	return 0;

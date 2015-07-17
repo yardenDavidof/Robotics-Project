@@ -13,19 +13,24 @@
 #include "../Movement/WaypointDriver.h"
 #include "../Movement/ParticleManager.h"
 #include "../Behaviors/Behavior.h"
+#include "../ILadyRobot.h"
+#include "../Utils/GridMap.h"
+#include "ConfigurationManager.h"
 
 #define READINGS_NUM 682
+#define REGULAR_SPEED 0.6
+#define OBSTACLE_SPEED 0.2
 
 using namespace std;
 
 class WaypointManeger {
 	vector<Location> waypoints;
-	WaypointDriver driver;
+	WaypointDriver* driver;
 	ParticleManager* particleManager;
 	Behavior* behavior;
 
 public:
-	WaypointManeger(vector<Location> path);
+	WaypointManeger(vector<Location> path, ILadyRobot* ladyRobot, GridMap* gridMap);
 	void run();
 	virtual ~WaypointManeger();
 };

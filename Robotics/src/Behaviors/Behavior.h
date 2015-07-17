@@ -18,6 +18,7 @@ public:
 	void read(double* readings);
 //	virtual bool startCondition();
 //	virtual bool stopCondition();
+	ILadyRobot* getLadyRobot();
 	void behave(double speed, double yaw);
 
 //	Behavior* addNext(Behavior* behavior);

@@ -7,26 +7,34 @@
 
 #include "WaypointManeger.h"
 
-//WaypointManeger::WaypointManeger(vector<Location> path):waypoints(path), driver(new WaypointDriver()),particleManager(new ParticleManager()) {}
+WaypointManeger::WaypointManeger(vector<Location> path, ILadyRobot* ladyRobot, GridMap* gridMap) {
+	waypoints = path;
+	behavior = new Behavior(ladyRobot);
+	particleManager = new ParticleManager(gridMap, ConfigurationManager::getInstance()->getStartLocationInGrid()->getYaw());
+	driver = new WaypointDriver(behavior);
+}
 
 void WaypointManeger::run(){
-//
-//	double readings[READINGS_NUM];
-//
-//	behavior->read(readings);
-//
-//	slamManager->update(new Position(), readings);
-//
-//	while ((behavior = getNextBehavior(behavior))) {
-//		Position* position = robot->getPosition();
-//
-//		behavior->behave();
-//
-//		read(readings);
-//
-//		slamManager->update(position->delta(robot->getPosition()), readings);
-//	}
+
+	int currentWaypoint = 0;
+	double readings[READINGS_NUM];
+
+	behavior->read(readings);
+
+	particleManager->updateAll(new Position(0,0,0), readings);
+
+	while (currentWaypoint < waypoints.size()) {
+		Position* position = behavior->getLadyRobot()->getPosition();
+
+		driver->letsGo(&waypoints[currentWaypoint]);
+
+
+		behavior->read(readings);
+
+		particleManager->updateAll(position->delta(behavior->getLadyRobot()->getPosition()), readings);
+	}
 }
+
 
 WaypointManeger::~WaypointManeger() {
 }

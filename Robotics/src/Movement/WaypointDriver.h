@@ -12,8 +12,6 @@
 #include <math.h>
 #include <stdio.h>
 
-#define PI 3.14159265
-
 using namespace std;
 
 class WaypointDriver {
@@ -22,6 +20,7 @@ private:
 
 public:
 	WaypointDriver(Behavior* behavior);
+	bool letsGo(Location* nextLocation);
 	static double angelCalculate(Location* robotLocation, Location* nextLocation);
 	virtual ~WaypointDriver();
 };

@@ -22,6 +22,10 @@ void Behavior::read(double* readings) {
 	}
 }
 
+ILadyRobot* Behavior::getLadyRobot(){
+	return ladyRobot;
+}
+
 Behavior::~Behavior() {
 }
 

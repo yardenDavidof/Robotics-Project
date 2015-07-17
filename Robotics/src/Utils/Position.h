@@ -9,6 +9,7 @@
 #define POSITION_H_
 
 #include "Location.h"
+#include <cmath>
 
 using namespace std;
 
@@ -23,9 +24,11 @@ public:
 	int getX();
 	int getY();
 	int getYaw();
+	Location* getLocation();
 	void setX(double setX);
 	void setY(double setY);
 	void setYaw(double setY);
+	Position* delta(Position* old);
 };
 
 #endif /* POSITION_H_ */

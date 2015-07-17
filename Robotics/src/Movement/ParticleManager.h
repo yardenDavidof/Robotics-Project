@@ -11,18 +11,20 @@
 #include "../Utils/Position.h"
 #include <vector>
 #include "../Movement/Particle.h"
+#include "../Utils/GridMap.h"
 
 using namespace std;
 
+// TODO: Maybe singleton
 class ParticleManager {
 private:
-	vector<Particle> particles;
+	static const int PARTICLE_NUM = 50;
+	std::vector<Particle> particles;
+	GridMap grid;
 
 public:
-
-
-	ParticleManager();
-	void updateAll(Position* delta, double laserScan[]);
+	ParticleManager(GridMap* gridMap, double yawRobot);
+	void updateAll(Position* delta, double* laserScan);
 	virtual ~ParticleManager();
 };
 

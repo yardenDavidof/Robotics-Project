@@ -24,6 +24,10 @@ int Position::getYaw()
 	return yaw;
 }
 
+Location* Position::getLocation(){
+	return location;
+}
+
 void Position::setX(double setX)
 {
 	location->x = setX;
@@ -37,6 +41,13 @@ void Position::setY(double setY)
 void Position::setYaw(double setYaw)
 {
 	yaw = setYaw;
+}
+
+// create new position from old and new position
+Position* Position::delta(Position* old){
+	return new Position(abs(old->getX() - getX()),
+						abs(old->getY() - getY()),
+						old->getYaw() - getYaw());
 }
 
 Position::~Position() {

@@ -30,9 +30,9 @@ int ConfigurationManager::getRobotHeight(){
 	return height;
 }
 
-Location* ConfigurationManager::getStartLocationInGrid(){
-	Location* mapLocation = this->getStartLocation();
-	return new Location((int)mapLocation->x/4, (int)mapLocation->y/4);
+Position* ConfigurationManager::getStartLocationInGrid(){
+	Position* mapLocation = this->getStartLocation();
+	return new Position((int)mapLocation->getX()/4, (int)mapLocation->getY()/4, mapLocation->getYaw());
 }
 
 Location* ConfigurationManager::getGoalLocationInGrid(){
@@ -78,7 +78,7 @@ void ConfigurationManager::readConfFile(){
 	    myfile.close();
 }
 
-Location* ConfigurationManager::getStartLocation(){
+Position* ConfigurationManager::getStartLocation(){
 	double x,y,yaw;
 	string totalLocation = dataMap["startLocation"].c_str();
 	 std::size_t index = totalLocation.find(" ");
@@ -90,7 +90,7 @@ Location* ConfigurationManager::getStartLocation(){
 	   yaw = atof(continueString.substr(index + 1).c_str());
 	 }
 
-	 return new Location(x, y);
+	 return new Position(x, y, yaw);
 }
 
 Location* ConfigurationManager::getGoalLocation(){
