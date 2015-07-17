@@ -9,6 +9,7 @@
 #define WAYPOINTDRIVER_H_
 #include "../Behaviors/Behavior.h"
 #include "../Utils/Location.h"
+#include "../Utils/Position.h"
 #include <math.h>
 #include <stdio.h>
 
@@ -21,8 +22,8 @@ private:
 public:
 	WaypointDriver(Behavior* behavior);
 	bool letsGo(Location* nextLocation);
-	static double angelCalculate(Location* robotLocation, Location* nextLocation);
-	virtual ~WaypointDriver();
+	static double angelCa l culate(Position* robotLocation, Position* nextLocation);
+R	virtual ~WaypointDriver();z
 };
 
 #endif /* WAYPOINTDRIVER_H_ */

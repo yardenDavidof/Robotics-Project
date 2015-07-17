@@ -10,8 +10,9 @@
 WaypointDriver::WaypointDriver(Behavior * behavior):behavior(behavior) {}
 
 bool WaypointDriver::letsGo(Location* nextLocation){
+
 	//calc angles
-	double yaw = 20;
+	double yaw = angelCalculate(behavior->getLadyRobot()->getPosition()->);
 
 	//do calculation  or switch to speed according to angles?
 	// function check if obstacle
@@ -22,9 +23,9 @@ bool WaypointDriver::letsGo(Location* nextLocation){
 	return true;
 }
 
-double WaypointDriver::angelCalculate(Location* robotLocation, Location* nextLocation){
-	double xDistance = nextLocation->x - robotLocation->x;
-	double yDistance = nextLocation->y - robotLocation->y;
+double WaypointDriver::angelCalculate(Position* robotLocation, Position* nextLocation){
+	double xDistance = nextLocation->getX() - robotLocation->getX();
+	double yDistance = nextLocation->getY() - robotLocation->getY();
 	double firstCalculate = xDistance/yDistance;
 
 	double angle = atan(firstCalculate) * 180/M_PI;
@@ -32,6 +33,9 @@ double WaypointDriver::angelCalculate(Location* robotLocation, Location* nextLoc
 	return angle;
 }
 
+ double WaypointDriver::degreeToRadian(double degree){
+	 return (M_PI * degree)/180;
+ }
 
 WaypointDriver::~WaypointDriver() {
 	// TODO Auto-generated destructor stub

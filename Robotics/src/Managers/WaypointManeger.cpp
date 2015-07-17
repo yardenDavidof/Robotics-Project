@@ -26,7 +26,9 @@ void WaypointManeger::run(){
 	while (currentWaypoint < waypoints.size()) {
 		Position* position = behavior->getLadyRobot()->getPosition();
 
-		driver->letsGo(&waypoints[currentWaypoint]);
+		if (driver->letsGo(&waypoints[currentWaypoint])){
+			currentWaypoint++;
+		}
 
 
 		behavior->read(readings);
