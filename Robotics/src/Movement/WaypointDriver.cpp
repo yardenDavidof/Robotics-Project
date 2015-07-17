@@ -11,19 +11,19 @@ WaypointDriver::WaypointDriver(Behavior * behavior):behavior(behavior) {}
 
 bool WaypointDriver::letsGo(Location* nextLocation){
 
-	//calc angles
-	double yaw = angelCalculate(behavior->getLadyRobot()->getPosition()->);
-
-	//do calculation  or switch to speed according to angles?
-	// function check if obstacle
-	double speed = 20;
-
-	behavior->behave(speed, yaw);
-//	behavior->behave()
-	return true;
+//	//calc angles
+//	double yaw = angleCalculate(behavior->getLadyRobot()->getPosition()->);
+//
+//	//do calculation  or switch to speed according to angles?
+//	// function check if obstacle
+//	double speed = 20;
+//
+//	behavior->behave(speed, yaw);
+////	behavior->behave()
+//	return true;
 }
 
-double WaypointDriver::angelCalculate(Position* robotLocation, Position* nextLocation){
+double WaypointDriver::angleCalculate(Position* robotLocation, Position* nextLocation){
 	double xDistance = nextLocation->getX() - robotLocation->getX();
 	double yDistance = nextLocation->getY() - robotLocation->getY();
 	double firstCalculate = xDistance/yDistance;

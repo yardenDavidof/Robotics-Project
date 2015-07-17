@@ -17,6 +17,27 @@ ParticleManager::ParticleManager(GridMap* gridMap, double yawRobot) {
 }
 
 void ParticleManager::updateAll(Position* delta, double* laserScan){
+	for (vector<Particle>::iterator particle = particles.begin();
+			particle != particles.end(); particle++) {
+			particle->Update(delta->getX(),delta->getY(), delta->getYaw(), laserScan, grid);
+//			FilterParticles(&particle,particle->getBelief());
+
+				}
+
+			FillParticlesWithNewMutations();
+
+
+}
+
+void ParticleManager::FilterParticles(Particle* particle, double particleBelife){
+
+//	if (particleBelife < BELIEF_THRESHOLD && particles.size() > 1) {
+//		particles.erase(particle, particles);
+//
+//	}
+}
+
+void ParticleManager::FillParticlesWithNewMutations(){
 
 }
 

@@ -19,12 +19,15 @@ using namespace std;
 class ParticleManager {
 private:
 	static const int PARTICLE_NUM = 50;
+	static const float BELIEF_THRESHOLD = 0.4;
 	std::vector<Particle> particles;
 	GridMap grid;
+	void FilterParticles(Particle* particle, double particleBelife);
 
 public:
 	ParticleManager(GridMap* gridMap, double yawRobot);
 	void updateAll(Position* delta, double* laserScan);
+	void FillParticlesWithNewMutations();
 	virtual ~ParticleManager();
 };
 

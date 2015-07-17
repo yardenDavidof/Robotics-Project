@@ -22,8 +22,9 @@ private:
 public:
 	WaypointDriver(Behavior* behavior);
 	bool letsGo(Location* nextLocation);
-	static double angelCa l culate(Position* robotLocation, Position* nextLocation);
-R	virtual ~WaypointDriver();z
+	static double angleCalculate(Position* robotLocation, Position* nextLocation);
+	static double degreeToRadian(double degree);
+	virtual ~WaypointDriver();
 };
 
 #endif /* WAYPOINTDRIVER_H_ */
