@@ -8,6 +8,11 @@
 #ifndef WAYPOINTDRIVER_H_
 #define WAYPOINTDRIVER_H_
 #include "../Behaviors/Behavior.h"
+#include "../Utils/Location.h"
+#include <math.h>
+#include <stdio.h>
+
+#define PI 3.14159265
 
 using namespace std;
 
@@ -17,6 +22,7 @@ private:
 
 public:
 	WaypointDriver(Behavior* behavior);
+	static double angelCalculate(Location* robotLocation, Location* nextLocation);
 	virtual ~WaypointDriver();
 };
 
