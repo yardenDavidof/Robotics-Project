@@ -8,31 +8,26 @@
 #ifndef BEHAVIORMANAGER_H_
 #define BEHAVIORMANAGER_H_
 
-#define BEHAVIORS_SIZE 8
-#define READINGS_NUM
-#define FORWARD 0
-#define BACKWARD  1
-#define RIGHT 2
-#define LEFT 3
-#define DIAGONAL_UP_RIGHT 4
-#define DIAGONAL_UP_LEFT 5
-#define DIAGONAL_DOWN_RIGHT 6
-#define DIAGONAL_DOWN_LEFT 7
+#define ROTATE_TURN_SPEED 0.6
+#define ROTATE_WALKING_SPEED 0
+#define TURN_SPEED 0
+#define WALKING_SPEED 0.4
 
-#define READINGS_NUM 682
+#include "../ILadyRobot.h"
 
+using namespace std;
+using namespace PlayerCc;
 
 class BehaviorManager {
 private:
-	ILadyRobot* ladyRobot;
-	Behavior* behaviors[BEHAVIORS_SIZE];
-	ParticleManager* particleManager;
-
-	void read(double* readings);
-	Behavior* getNextBehavior(Behavior* behavior);
+ILadyRobot* ladyRobot;
 public:
-	BehaviorManager(ILadyRobot* ladyRobot, ParticleManager* particleManager);
-	void run();
+	BehaviorManager(ILadyRobot* ladyRobot);
+	void turnRight(double yaw);
+	void turnLeft(double yaw);
+	void goForward();
+	void read(double* readings);
+	ILadyRobot* getLadyRobot();
 	virtual ~BehaviorManager();
 };
 

@@ -7,7 +7,7 @@
 
 #ifndef WAYPOINTDRIVER_H_
 #define WAYPOINTDRIVER_H_
-#include "../Behaviors/Behavior.h"
+#include "../Managers/BehaviorManager.h"
 #include "../Utils/Location.h"
 #include "../Utils/Position.h"
 #include <math.h>
@@ -17,12 +17,13 @@ using namespace std;
 
 class WaypointDriver {
 private:
-	Behavior* behavior;
+	BehaviorManager* behaviorManager;
 
 public:
-	WaypointDriver(Behavior* behavior);
-	bool letsGo(Location* nextLocation);
-	static double angleCalculate(Position* robotLocation, Position* nextLocation);
+	WaypointDriver(BehaviorManager* manager);
+	bool letsGo(Location* nextLocation, Position* robotPosition);
+	static double angleCalculate(Location* robotLocation, Location* nextLocation);
+	static double angleToMove(Position* robotPosition, Location* nextPosition);
 	static double degreeToRadian(double degree);
 	virtual ~WaypointDriver();
 };

@@ -8,6 +8,10 @@ ILadyRobot::ILadyRobot(char* ip, int port){
 	cleanCache();
 }
 
+Position2dProxy* ILadyRobot::getPosition2DProxy(){
+	return position2dProxy;
+}
+
 void ILadyRobot::read(){
 	playerClient->Read();
 }
@@ -39,7 +43,8 @@ void ILadyRobot::cleanCache() {
 }
 
 double ILadyRobot::getRange(int index) {
-	return laser->GetRange(index);
+	return (*laser)[index];
+
 }
 
 ILadyRobot::~ILadyRobot(){

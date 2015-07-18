@@ -32,7 +32,9 @@ public:
 	double getYaw();
 	double getXPosition();
 	double getYPosition();
+	Position2dProxy* getPosition2DProxy();
 	Position* getPosition();
+	void setPosition();
 	void setSpeed(double speed, double yaw);
 	double getRange(int index);
 

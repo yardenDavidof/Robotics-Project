@@ -33,8 +33,7 @@ int main() {
 	ILadyRobot ladyRobot("localhost", 6665);
 	WaypointManeger manager(path, &ladyRobot, &originGrid);
 	manager.run();
-
-
 	weightGrid.drawGrid(path);
+
 	return 0;
 }

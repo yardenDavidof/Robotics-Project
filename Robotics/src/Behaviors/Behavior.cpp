@@ -18,7 +18,7 @@ void Behavior::behave(double speed, double yaw){
 void Behavior::read(double* readings) {
 	ladyRobot->read();
 	for (int i = 0; i < READINGS_NUM; i++){
-		readings[i] = ladyRobot->getRange(i);
+//		readings[i] = ladyRobot->getRange(i);
 	}
 }
 

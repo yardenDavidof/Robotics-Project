@@ -12,7 +12,7 @@
 #include "../Utils/Location.h"
 #include "../Movement/WaypointDriver.h"
 #include "../Movement/ParticleManager.h"
-#include "../Behaviors/Behavior.h"
+#include "../Managers/BehaviorManager.h"
 #include "../ILadyRobot.h"
 #include "../Utils/GridMap.h"
 #include "ConfigurationManager.h"
@@ -27,7 +27,7 @@ class WaypointManeger {
 	vector<Location> waypoints;
 	WaypointDriver* driver;
 	ParticleManager* particleManager;
-	Behavior* behavior;
+	BehaviorManager* behaviorManager;
 
 public:
 	WaypointManeger(vector<Location> path, ILadyRobot* ladyRobot, GridMap* gridMap);

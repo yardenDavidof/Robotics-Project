@@ -15,6 +15,7 @@
 
 using namespace std;
 
+// TODO - weight of cells
 class GridMap {
 private:
 	int mapWidth;
