@@ -41,7 +41,18 @@ void ParticleManager::FilterParticles(vector<Particle>::iterator particle){
 }
 
 Position* ParticleManager::GetProbablyPosition(){
-	return NULL;
+	double max = 0;
+	vector<Particle>::iterator ProbParticle;
+
+	for (vector<Particle>::iterator particle = particles.begin();
+				particle != particles.end(); particle++) {
+		if(max < particle->getBelief()){
+			max = particle->getBelief();
+			ProbParticle = particle;
+		}
+	}
+
+	return ProbParticle->getPosition();
 }
 
 void ParticleManager::FillParticlesWithNewMutations(){
