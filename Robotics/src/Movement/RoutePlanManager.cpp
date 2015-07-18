@@ -79,7 +79,6 @@ vector<Location> RoutePlanManager::reconstruct_path(Location* start, Location* g
 	current = *getValue(came_from,current);
     path.push_back(current);
   }
-
   return path;
 }
 

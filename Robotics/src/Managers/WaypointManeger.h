@@ -16,6 +16,7 @@
 #include "../ILadyRobot.h"
 #include "../Utils/GridMap.h"
 #include "ConfigurationManager.h"
+#include <algorithm>
 
 #define READINGS_NUM 682
 #define REGULAR_SPEED 0.6
@@ -28,10 +29,12 @@ class WaypointManeger {
 	WaypointDriver* driver;
 	ParticleManager* particleManager;
 	BehaviorManager* behaviorManager;
+	vector<Location> filteredWaypoints;
 
 public:
 	WaypointManeger(vector<Location> path, ILadyRobot* ladyRobot, GridMap* gridMap);
 	void run();
+	void selectWaypoints();
 	virtual ~WaypointManeger();
 };
 

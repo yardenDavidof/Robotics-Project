@@ -31,7 +31,7 @@ public:
 	bool letsGo(Location* nextLocation, Position* robotPosition);
 	static double modDoubles(double first, double second);
 	static double distance(Location* robotLocation, Location* nextLocation);
-	static double angleToMove(Position* robotPosition, Location* nextPosition);
+	static double angleToMove(Location* robotPosition, Location* nextPosition);
 	virtual ~WaypointDriver();
 };
 

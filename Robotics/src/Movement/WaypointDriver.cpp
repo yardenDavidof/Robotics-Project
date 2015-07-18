@@ -11,65 +11,44 @@ WaypointDriver::WaypointDriver(BehaviorManager * manager):behaviorManager(manage
 
 bool WaypointDriver::letsGo(Location* nextLocation, Position* probRobotPos){
 
+	cout<< "robotloc " << probRobotPos->getX() << " " << probRobotPos->getY()<<endl;
 	//calc angles
-	double yaw = angleToMove(probRobotPos, nextLocation);
-
+	double yaw = angleToMove(probRobotPos->getLocation(), nextLocation);
+	cout<<"yaww " << yaw<<endl;
 	bool isArriveToPoint = false;
-	//do calculation  or switch to speed according to angles?
-	// function check if obstacle
-	if(yaw == 0){
-		behaviorManager->goForward();
-		Position* deltaPosition = behaviorManager->getLadyRobot()->getPosition()->delta(new Position(nextLocation->x, nextLocation->y, 0));
-		if( deltaPosition->getX() <0.1 && deltaPosition->getY() < 0.1){
-			isArriveToPoint = true;
-		}
-	}
-	else if(yaw < 0)
+
+	// TODO put in function && remove yaw =0
+	 if(yaw <= 0)
 	{
 		behaviorManager->turnRight(yaw, dtor(probRobotPos->getYaw()));
-		behaviorManager->goForward();
-				Position* deltaPosition = behaviorManager->getLadyRobot()->getPosition()->delta(new Position(nextLocation->x, nextLocation->y, 0));
-				cout << "x " << deltaPosition->getX() << " y " << deltaPosition->getY() << endl;
-				if( deltaPosition->getX() <0.3 && deltaPosition->getY() < 0.3){
-					isArriveToPoint = true;
-					behaviorManager->getLadyRobot()->setSpeed(0,0);
-				}
+		behaviorManager->goForward(probRobotPos, nextLocation);
+//				Position* deltaPosition = probRobotPos->delta(new Position(nextLocation->x, nextLocation->y, 0));
+//				cout << "x " << deltaPosition->getX() << " y " << deltaPosition->getY() << endl;
+//				if( deltaPosition->getX()/10 <=0.4 && deltaPosition->getY()/10 <= 0.4){
+//					isArriveToPoint = true;
+//					behaviorManager->getLadyRobot()->setSpeed(0,0);
+//				}
 	}
 	else {
 		behaviorManager->turnLeft(yaw, dtor(probRobotPos->getYaw()));
-		behaviorManager->goForward();
-				Position* deltaPosition = behaviorManager->getLadyRobot()->getPosition()->delta(new Position(nextLocation->x, nextLocation->y, 0));
-				if( deltaPosition->getX() <0.3 && deltaPosition->getY() < 0.3){
-					isArriveToPoint = true;
-					behaviorManager->getLadyRobot()->setSpeed(0,0);
-				}
+		behaviorManager->goForward(probRobotPos, nextLocation);
+//				Position* deltaPosition = probRobotPos->delta(new Position(nextLocation->x, nextLocation->y, 0));
+//				cout << "x " << deltaPosition->getX() << " y " << deltaPosition->getY() << endl;
+//				if( deltaPosition->getX()/10 <=0.4 && deltaPosition->getY()/10 <= 0.4){
+//					isArriveToPoint = true;
+//					behaviorManager->getLadyRobot()->setSpeed(0,0);
+//				}
 	}
 
-	return isArriveToPoint;
+	return true;
 }
-double WaypointDriver::angleToMove(Position* robotPosition, Location* nextLocation){
-
-//	double angleCalcRad = dtor(modDoubles(angleCalculate(robotPosition->getLocation(),nextLocation),360.0));
-//	cout<<modDoubles(angleCalculate(robotPosition->getLocation(),nextLocation),360.0)<<endl;
-//	double robotYawRad = dtor(robotPosition->getYaw());
-//	double angleToMove = robotYawRad - angleCalcRad;
-//
-//
-//
-//	if (angleToMove <= M_PI ){
-//		return -1*angleToMove;
-//	}
-//	else
-//	{
-//		return 2*M_PI - angleToMove;
-//	}
-
-	float yDeltaToPoint = abs(nextLocation->y - robotPosition->getY());
-		float distanceToPoint = distance(robotPosition->getLocation(), nextLocation);
+double WaypointDriver::angleToMove(Location* robotLocation, Location* nextLocation){
+	float yDeltaToPoint = abs(nextLocation->y - robotLocation->y);
+		float distanceToPoint = distance(robotLocation, nextLocation);
 		float neededYaw = acos(yDeltaToPoint / distanceToPoint);
 
 		double radYaw;
-		int quarter = getQuarter(robotPosition->getLocation(), nextLocation);
+		int quarter = getQuarter(robotLocation, nextLocation);
 		if (quarter == QUARTER_ONE){
 			radYaw = M_PI_2 - neededYaw;
 		}
