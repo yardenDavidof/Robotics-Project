@@ -23,8 +23,8 @@ private:
 ILadyRobot* ladyRobot;
 public:
 	BehaviorManager(ILadyRobot* ladyRobot);
-	void turnRight(double yaw);
-	void turnLeft(double yaw);
+	void turnRight(double yaw, double startRobotYaw);
+	void turnLeft(double yaw, double startRobotYaw);
 	void goForward();
 	void read(double* readings);
 	ILadyRobot* getLadyRobot();

@@ -23,7 +23,6 @@ class ConfigurationManager {
 private:
 	const char* CONF_FILE_LOCATION = "src/Resources/parameters.txt";
 	map<string, string> dataMap;
-	Position* getStartLocation();
 	Location* getGoalLocation();
 	ConfigurationManager();
 
@@ -32,6 +31,7 @@ public:
 	static ConfigurationManager* getInstance();
 	string getMapPath();
 	int getRobotWidth();
+	Position* getStartLocation();
 	int getRobotHeight();
 	double getMapResolutionCM();
 	double getGridResolutionCM();

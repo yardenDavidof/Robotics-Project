@@ -9,25 +9,29 @@
 
 BehaviorManager::BehaviorManager(ILadyRobot* ladyRobot):ladyRobot(ladyRobot) {}
 
-void BehaviorManager::turnLeft(double yaw){
-	double initialYaw = ladyRobot->getYaw();
-	while (ladyRobot->getYaw() < initialYaw +yaw){
+void BehaviorManager::turnLeft(double yaw, double startRobotYaw){
+//	double initialYaw = ladyRobot->getYaw();
+	while (ladyRobot->getYaw() < startRobotYaw +yaw){
+//		cout<<ladyRobot->getYaw()<<endl;
 		ladyRobot->setSpeed(TURN_SPEED, ROTATE_TURN_SPEED);
-	}
+		ladyRobot->read();
 
+	}
 	ladyRobot->setSpeed(0,0);
 }
 
-void BehaviorManager::turnRight(double yaw){
-	double initialYaw = ladyRobot->getYaw();
-	while (ladyRobot->getYaw() > initialYaw - yaw){
+void BehaviorManager::turnRight(double yaw, double startRobotYaw){
+//	double initialYaw = ladyRobot->getYaw();
+	while (ladyRobot->getYaw() > startRobotYaw - yaw){
 		ladyRobot->setSpeed(TURN_SPEED, -ROTATE_TURN_SPEED);
+		ladyRobot->read();
 	}
 	ladyRobot->setSpeed(0,0);
 }
 
 void BehaviorManager::goForward(){
 	ladyRobot->setSpeed(WALKING_SPEED,ROTATE_WALKING_SPEED);
+	ladyRobot->read();
 }
 
 //get laser reading

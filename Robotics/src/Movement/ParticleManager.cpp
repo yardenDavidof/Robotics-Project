@@ -11,8 +11,8 @@ ParticleManager::ParticleManager(GridMap* gridMap, double yawRobot) {
 	grid = gridMap;
 	for (int particleIndex = 0; particleIndex < PARTICLE_NUM; particleIndex++) {
 			Particle newParticle(
-					(rand() % 10 + 1) + gridMap->getMapWidth() / 2,
-					(rand() % 10 + 1) + gridMap->getMapHeight()/ 2, yawRobot);
+					(rand() % 10 + 1) + gridMap->getGridWidth() / 2,
+					(rand() % 10 + 1) + gridMap->getGridHeight()/ 2, yawRobot);
 			particles.push_back(newParticle);
 		}
 }

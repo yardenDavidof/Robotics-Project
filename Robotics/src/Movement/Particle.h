@@ -15,7 +15,10 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
+#include "../Utils/Location.h"
 
+using namespace std;
 
 class Particle {
 	static const double NRMALIZATION = 0.5;

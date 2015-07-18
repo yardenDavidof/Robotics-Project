@@ -13,6 +13,7 @@
 
 #include <libplayerc++/playerc++.h>
 #include "Utils/Position.h"
+#include  "Managers/ConfigurationManager.h"
 
 using namespace std;
 using namespace PlayerCc;

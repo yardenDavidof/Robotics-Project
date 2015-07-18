@@ -7,6 +7,12 @@
 
 #ifndef WAYPOINTDRIVER_H_
 #define WAYPOINTDRIVER_H_
+
+#define QUARTER_ONE 1
+#define QUARTER_TWO 2
+#define QUARTER_THREE 3
+#define QUARTER_FOUR 4
+
 #include "../Managers/BehaviorManager.h"
 #include "../Utils/Location.h"
 #include "../Utils/Position.h"
@@ -21,10 +27,11 @@ private:
 
 public:
 	WaypointDriver(BehaviorManager* manager);
+	static int getQuarter(Location* initialLoc, Location* nextLoc);
 	bool letsGo(Location* nextLocation, Position* robotPosition);
-	static double angleCalculate(Location* robotLocation, Location* nextLocation);
+	static double modDoubles(double first, double second);
+	static double distance(Location* robotLocation, Location* nextLocation);
 	static double angleToMove(Position* robotPosition, Location* nextPosition);
-	static double degreeToRadian(double degree);
 	virtual ~WaypointDriver();
 };
 

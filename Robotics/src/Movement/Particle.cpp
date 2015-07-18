@@ -29,6 +29,8 @@ double Particle::probByMov(Position* position){
 // predict by laser
 double Particle::prodByScan(Position* delta, double laser[], GridMap* grid){
 	float distance = sqrt(pow(delta->getX() * ConfigurationManager::getInstance()->getGridResolutionCM(), 2) + pow(delta->getY() * ConfigurationManager::getInstance()->getGridResolutionCM(), 2));
+//		cout << position->getYaw()<< endl;
+
 		position->setX(position->getX() + getXDelta(position->getYaw(), distance));
 		position->setY(position->getY() + getYDelta(position->getYaw(), distance));
 
@@ -43,11 +45,13 @@ double Particle::prodByScan(Position* delta, double laser[], GridMap* grid){
 			int col = position->getY() + round(getYDelta(position->getYaw() + laserInRadians, laserDistance));
 
 
-			if (row < 0 || col < 0 || row > grid->getGridHeight() || col > grid->getGridWidth()) {
+			if (row < 0 || col < 0 || row >= grid->getGridHeight() || col >= grid->getGridWidth()) {
 				errors++;
 				break;
 			}
 
+//			cout<<"row " << row <<endl;
+//			cout<<"col " << col <<endl;
 			int currentCellType = grid->gridMap[row][col];
 			//int currentCellType = 0;
 			bool blocked = laserDistance < LASER_RANGE * ConfigurationManager::getInstance()->getGridResolutionCM();

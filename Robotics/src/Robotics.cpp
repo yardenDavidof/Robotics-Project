@@ -29,7 +29,8 @@ int main() {
 
 	RoutePlanManager* plan = new RoutePlanManager();
 	vector<Location> path = plan->a_star_search(weightGrid,start,goal);
-
+//	cout<<"weight grid h " << weightGrid.getGridHeight() << " - " << weightGrid.getGridWidth()<<endl;
+//	cout<<"origin grid h " << originGrid.getGridHeight() << " - " << originGrid.getGridWidth()<<endl;
 	ILadyRobot ladyRobot("localhost", 6665);
 	WaypointManeger manager(path, &ladyRobot, &originGrid);
 	manager.run();

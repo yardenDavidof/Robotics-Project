@@ -25,7 +25,9 @@ void WaypointManeger::run(){
 
 	while (currentWaypoint < waypoints.size()) {
 		Position* positionStart = particleManager->GetProbablyPosition();
+//		cout<< "x: " << positionStart->getX() << " y: " << positionStart->getY()<<endl;
 		if(driver->letsGo(&waypoints[currentWaypoint], positionStart)){
+			cout<<"curent wp " << currentWaypoint<<endl;
 			currentWaypoint++;
 		}
 
