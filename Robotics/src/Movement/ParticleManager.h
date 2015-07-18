@@ -21,13 +21,13 @@ private:
 	static const int PARTICLE_NUM = 50;
 	static const float BELIEF_THRESHOLD = 0.4;
 	std::vector<Particle> particles;
-	GridMap grid;
+	GridMap* grid;
 	void FilterParticles(vector<Particle>::iterator particle);
-
 public:
 	ParticleManager(GridMap* gridMap, double yawRobot);
 	void updateAll(Position* delta, double* laserScan);
 	void FillParticlesWithNewMutations();
+	Position* GetProbablyPosition();
 	virtual ~ParticleManager();
 };
 
