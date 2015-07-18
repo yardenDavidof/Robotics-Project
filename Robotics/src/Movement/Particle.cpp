@@ -84,6 +84,10 @@ double Particle::getBelief(){
 	return belief;
 }
 
+Position* Particle::getPosition(){
+	return position;
+}
+
 Particle::~Particle() {
 	// TODO Auto-generated destructor stub
 }

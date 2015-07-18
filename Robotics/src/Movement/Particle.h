@@ -30,6 +30,7 @@ public:
 	Particle(double x, double y, double yaw);
 	void Update(double deltaX,double deltaY,double deltaYaw,double laser[], GridMap grid);
 	double getBelief();
+	Position* getPosition();
 	virtual ~Particle();
 
 	static double getXDelta(double degree, double distance) {

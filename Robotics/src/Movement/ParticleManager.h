@@ -22,7 +22,7 @@ private:
 	static const float BELIEF_THRESHOLD = 0.4;
 	std::vector<Particle> particles;
 	GridMap grid;
-	void FilterParticles(Particle* particle, double particleBelife);
+	void FilterParticles(vector<Particle>::iterator particle);
 
 public:
 	ParticleManager(GridMap* gridMap, double yawRobot);

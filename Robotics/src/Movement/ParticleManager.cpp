@@ -20,7 +20,9 @@ void ParticleManager::updateAll(Position* delta, double* laserScan){
 	for (vector<Particle>::iterator particle = particles.begin();
 			particle != particles.end(); particle++) {
 			particle->Update(delta->getX(),delta->getY(), delta->getYaw(), laserScan, grid);
-//			FilterParticles(&particle,particle->getBelief());
+
+			// Check if this particle is reliability
+			this->FilterParticles(particle);
 
 				}
 
@@ -29,19 +31,26 @@ void ParticleManager::updateAll(Position* delta, double* laserScan){
 
 }
 
-void ParticleManager::FilterParticles(Particle* particle, double particleBelife){
+void ParticleManager::FilterParticles(vector<Particle>::iterator particle){
 
-//	if (particleBelife < BELIEF_THRESHOLD && particles.size() > 1) {
-//		particles.erase(particle, particles);
-//
-//	}
+	if (particle->getBelief() < BELIEF_THRESHOLD && particles.size() > 1) {
+		particles.erase(particle);
+
+	}
 }
 
 void ParticleManager::FillParticlesWithNewMutations(){
 
+	while (particles.size() < (unsigned)PARTICLE_NUM) {
+			int x = particles[rand() % particles.size()].getPosition()->getX();
+			int y = particles[rand() % particles.size()].getPosition()->getY();
+			int yaw = particles[rand() % particles.size()].getPosition()->getYaw();
+			Particle partical(x, y, yaw);
+			particles.push_back(partical);
+		}
+
 }
 
 ParticleManager::~ParticleManager() {
-	// TODO Auto-generated destructor stub
 }
 
