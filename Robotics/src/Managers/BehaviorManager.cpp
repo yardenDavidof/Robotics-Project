@@ -37,13 +37,16 @@ void BehaviorManager::goForward(Position* probRobotPos, Location* nextLocation){
 	ladyRobot->read();
 	Position* deltaPosition = probRobotPos->delta(new Position(nextLocation->x, nextLocation->y, 0));
 	while( deltaPosition->getX() >20 || deltaPosition->getY() > 20){
+		Position* prevPos = ladyRobot->getPosition();
 		cout << "x robotParticle" << probRobotPos->getX() << " y robotParticle" << probRobotPos->getY() << " yaw robotP " << probRobotPos->getYaw() << endl;
 		cout << "x  delta" << deltaPosition->getX() << " y delta" << deltaPosition->getY() << endl;
 		ladyRobot->setSpeed(WALKING_SPEED,ROTATE_WALKING_SPEED);
 		ladyRobot->read();//57.2957795
 		read(readings);
 		Position* po = new Position(ladyRobot->getXPosition()*10, ladyRobot->getYPosition()*10, ladyRobot->getYaw()*57.2957795);
-		particleManager->updateAll(po->delta(probRobotPos), readings , nextLocation);
+//		particleManager->updateAll(po->delta(probRobotPos), readings , nextLocation);
+		particleManager->updateAll(prevPos->delta(ladyRobot->getPosition()), readings , nextLocation);
+
 //		cout << "x  ladyProxy" << ladyRobot->getPosition()->getX() << " y ladyProxy" << ladyRobot->getPosition()->getY() << " yaw ladyProxy" << ladyRobot->getYaw() <<endl;
 		cout << "x  Proxy i cm" << po->getX() << " y proxy in cm" << po->getY() << " yaw in deg" << po->getYaw() <<endl << endl;
 
