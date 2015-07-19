@@ -25,8 +25,11 @@ void WaypointManeger::run(){
 
 	behaviorManager->read(readings);
 
+		Position* newPos = new Position(0,0,0);
 
 	Position* positionStart = ConfigurationManager::getInstance()->getStartLocationInGrid();
+//	particleManager->updateAll(newPos->delta(positionStart), readings);
+
 	while (currentWaypoint < filteredWaypoints.size()) {
 
 //		cout<< "x: " << positionStart->getX() << " y: " << positionStart->getY()<<endl;
@@ -37,7 +40,7 @@ void WaypointManeger::run(){
 
 		behaviorManager->read(readings);
 
-		particleManager->updateAll(positionStart->delta(behaviorManager->getLadyRobot()->getPosition()), readings);
+		particleManager->updateAll(positionStart->delta(behaviorManager->getLadyRobot()->getPosition()), readings, &filteredWaypoints[currentWaypoint]);
 
 		positionStart = particleManager->GetProbablyPosition();
 	}
@@ -46,20 +49,13 @@ void WaypointManeger::run(){
 void WaypointManeger::selectWaypoints(){
 	double previousAngle = 0, nextAngle = 0;
 
-	cout << "Waypoints full: "<< endl;
-	for (unsigned i =0; i< waypoints.size() - 1; i++){
-		cout << "x " << waypoints[i].x << " y " << waypoints[i].y << endl;
-	}
-
-	cout << "filtered: "  << endl;
 	for (unsigned i =0; i< waypoints.size() - 1; i++){
 		Location current = waypoints[i];
 		Location nextLocation = waypoints[i + 1];
-		nextAngle = WaypointDriver::angleToMove(&current, &nextLocation);
+		nextAngle = AngleHelper::angleToMove(&current, &nextLocation);
 
 		if (nextAngle != previousAngle){
 			filteredWaypoints.push_back(current);
-			cout << "x " << current.x << " y " << current.y << endl;
 		}
 
 		previousAngle = nextAngle;

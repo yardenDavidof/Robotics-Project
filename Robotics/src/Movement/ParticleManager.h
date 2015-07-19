@@ -12,6 +12,10 @@
 #include <vector>
 #include "../Movement/Particle.h"
 #include "../Utils/GridMap.h"
+#include "../Managers/ConfigurationManager.h"
+#include "../Utils/Location.h"
+#include <algorithm>
+#include <queue>
 
 using namespace std;
 
@@ -20,12 +24,15 @@ class ParticleManager {
 private:
 	static const int PARTICLE_NUM = 50;
 	static const float BELIEF_THRESHOLD = 0.4;
-	std::vector<Particle> particles;
+//	ParticlePriorityQueue particles;
+	priority_queue<Particle*> particles;
+	void deleteUnreliableParticles(double minBelife);
+
 	GridMap* grid;
-	void FilterParticles(vector<Particle>::iterator particle);
+	void FilterParticles();
 public:
 	ParticleManager(GridMap* gridMap, double yawRobot);
-	void updateAll(Position* delta, double* laserScan);
+	void updateAll(Position* delta, double* laserScan, Location* nextLocation);
 	void FillParticlesWithNewMutations();
 	Position* GetProbablyPosition();
 	virtual ~ParticleManager();

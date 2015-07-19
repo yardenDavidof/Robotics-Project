@@ -15,7 +15,7 @@ ConfigurationManager* ConfigurationManager::getInstance(){
 	static ConfigurationManager instance;
 	return &instance;
 }
-
+//todo: read ~
 string ConfigurationManager::getMapPath(){
 	return dataMap["map"];
 }

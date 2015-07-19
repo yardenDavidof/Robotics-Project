@@ -8,16 +8,12 @@
 #ifndef WAYPOINTDRIVER_H_
 #define WAYPOINTDRIVER_H_
 
-#define QUARTER_ONE 1
-#define QUARTER_TWO 2
-#define QUARTER_THREE 3
-#define QUARTER_FOUR 4
-
 #include "../Managers/BehaviorManager.h"
 #include "../Utils/Location.h"
 #include "../Utils/Position.h"
 #include <math.h>
 #include <stdio.h>
+#include "../Utils/AngleHelper.h"
 
 using namespace std;
 

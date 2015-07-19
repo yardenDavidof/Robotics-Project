@@ -14,16 +14,22 @@ Particle::Particle(double x, double y, double yaw){
 }
 
 // belief
-double Particle::probByMov(Position* position){
-	double distance = sqrt(pow(position->getX(), 2) + pow(position->getY(), 2));
-	double yawProbability = abs(abs(position->getYaw() * (180 / M_PI)) - 180)/180;
+double Particle::probByMov(Position* delta){
+	double distance = sqrt(pow(delta->getX(), 2) + pow(delta->getY(), 2));
+	float yawProbability = abs(delta->getYaw()) ;
 
-	// daniel&guy option
-	double distanceProbability = (DISTANCE_THRESHOLD - distance) / DISTANCE_THRESHOLD;;
+	float propability = 0.25;
 
-	return yawProbability * distanceProbability;
-//	return distance;
-//	return NULL;
+	if (distance <= MAX_DISTANCE)
+		propability += 0.25;
+	if (yawProbability <= MAX_YAW)
+		propability += 0.25;
+	if (yawProbability == 0)
+		propability += 0.25;
+
+	return propability;
+
+
 }
 
 // predict by laser
@@ -31,10 +37,7 @@ double Particle::prodByScan(Position* delta, double laser[], GridMap* grid){
 	float distance = sqrt(pow(delta->getX() * ConfigurationManager::getInstance()->getGridResolutionCM(), 2) + pow(delta->getY() * ConfigurationManager::getInstance()->getGridResolutionCM(), 2));
 //		cout << position->getYaw()<< endl;
 
-		position->setX(position->getX() + getXDelta(position->getYaw(), distance));
-		position->setY(position->getY() + getYDelta(position->getYaw(), distance));
 
-		position->setYaw(position->getYaw() + delta->getYaw());
 		int errors = 0;
 
 //		map.updateMap(round(x), round(y), Map::ROBOT_CURRENT_CELL);
@@ -73,15 +76,54 @@ double Particle::prodByScan(Position* delta, double laser[], GridMap* grid){
 
 }
 
+void Particle::setPositionDelta(Location* nextLocation, Position* delta){
+	int quarter = AngleHelper::getQuarter(position->getLocation(), nextLocation);
+	double finalDeltaX = delta->getX(), finalDeltaY = delta->getY();
+
+	switch (quarter)
+	{
+		case QUARTER_TWO:
+		{
+			finalDeltaX = -finalDeltaX;
+			break;
+		}
+		case QUARTER_THREE:
+		{
+			finalDeltaX = -finalDeltaX;
+			finalDeltaY = -finalDeltaY;
+			break;
+		}
+		case QUARTER_FOUR:
+		{
+			finalDeltaY = -finalDeltaY;
+			break;
+		}
+	}
+	position->setX(position->getX() + finalDeltaX);
+	position->setY(position->getY() + finalDeltaY);
+	position->setYaw(position->getYaw() + modDouble(delta->getYaw(), 360));
+
+}
 
 
-void Particle::Update(Position* position,double laser[], GridMap* grid){
-	float predBel = probByMov(position)*belief;
-	belief = NRMALIZATION * prodByScan(position,laser, grid) * predBel;
+void Particle::Update(Position* delta,double laser[], GridMap* grid, Location* nextLocation){
+	float predBel = probByMov(delta)*belief;
+	belief = NRMALIZATION * prodByScan(delta,laser, grid) * predBel;
 
-	//float predMoveVal = calcParticleProbabilty(delta);
-//	float probUpdate = updateMap(delta, laserScan);
-//	belief *= (double)predMoveVal * (double)probUpdate * NORMALIZE_FACTOR;
+
+
+//	position->setX(position->getX() + delta->getX());
+//	position->setY(position->getY() + delta->getY());
+	//	position->setYaw(position->getYaw() + modDouble(delta->getYaw(), 360));
+
+	setPositionDelta(nextLocation, delta);
+	cout << "position->getY() : " << position->getY() << " delta->getY() " << delta->getY() << endl;
+
+
+}
+
+bool Particle::operator<(const Particle& secondParticle) const{
+	return (this->belief > secondParticle.belief);
 }
 
 double Particle::getBelief(){
@@ -90,6 +132,10 @@ double Particle::getBelief(){
 
 Position* Particle::getPosition(){
 	return position;
+}
+
+double Particle::modDouble(double first, double second){
+	return first - ((int)first/second)*second;
 }
 
 Particle::~Particle() {

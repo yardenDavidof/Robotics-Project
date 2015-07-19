@@ -6,7 +6,7 @@ ILadyRobot::ILadyRobot(char* ip, int port){
 	position2dProxy = new Position2dProxy(playerClient);
 	position2dProxy->SetMotorEnable(true);
 	Position* startPos = ConfigurationManager::getInstance()->getStartLocation();
-	position2dProxy->SetOdometry(startPos->getX()/10, startPos->getY()/10, dtor(startPos->getYaw()));
+	position2dProxy->SetOdometry(startPos->getX()*0.025, startPos->getY()*0.025, dtor(startPos->getYaw()));
 	cleanCache();
 }
 
