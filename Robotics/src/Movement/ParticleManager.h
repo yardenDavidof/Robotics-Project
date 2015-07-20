@@ -27,6 +27,7 @@ private:
 //	ParticlePriorityQueue particles;
 	priority_queue<Particle*> particles;
 	void deleteUnreliableParticles(double minBelife);
+	bool isGoodNeighbour(Location* neighbourLoc);
 
 	GridMap* grid;
 	void FilterParticles();

@@ -153,9 +153,13 @@ void ParticleManager::FillParticlesWithNewMutations(){
 
 		for(int i =0; i<neighbours.size(); i++)
 		{
+
 			Position* pos = new Position(neighbours[i]->x, neighbours[i]->y, current->getPosition()->getYaw());
-			Particle* newParticle = new Particle(pos->getX(), pos->getY(), pos->getYaw());
-			tempList.push(newParticle);
+			if(isGoodNeighbour(pos->getLocation()))
+			{
+				Particle* newParticle = new Particle(pos->getX(), pos->getY(), pos->getYaw());
+				tempList.push(newParticle);
+			}
 //			particles.push_back(Particle(pos->getX(), pos->getY(), pos->getYaw()));
 		}
 
@@ -168,6 +172,33 @@ void ParticleManager::FillParticlesWithNewMutations(){
 	tempList = priority_queue<Particle*>();
 
 
+}
+
+bool ParticleManager::isGoodNeighbour(Location* neighbourLoc){
+
+	int neighbourUpXIndex = neighbourLoc->x -1;
+	int neighbourDownXIndex = neighbourLoc->x +1;
+	int neighbourRightYIndex = neighbourLoc->y +1;
+	int neighbourLeftYIndex = neighbourLoc->x -1;
+
+	if(neighbourUpXIndex >= 0){
+		if(grid->gridMap[neighbourUpXIndex][(int)neighbourLoc->y] == grid->BLOCKED_CELL)
+			return false;
+	}
+	if(neighbourDownXIndex < grid->getGridHeight()){
+		if(grid->gridMap[neighbourDownXIndex][(int)neighbourLoc->y] == grid->BLOCKED_CELL)
+			return false;
+	}
+	if(neighbourLeftYIndex >=0){
+		if(grid->gridMap[(int)neighbourLoc->x][neighbourLeftYIndex] == grid->BLOCKED_CELL)
+			return false;
+	}
+	if(neighbourRightYIndex < grid->getGridWidth()){
+		if(grid->gridMap[(int)neighbourLoc->x][neighbourRightYIndex] == grid->BLOCKED_CELL)
+			return false;
+	}
+
+	return true;
 }
 
 
