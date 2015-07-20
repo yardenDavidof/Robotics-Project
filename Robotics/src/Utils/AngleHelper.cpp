@@ -15,20 +15,23 @@ AngleHelper::AngleHelper() {
 double AngleHelper::angleToMove(Location* robotLocation, Location* nextLocation){
 
 	float yDeltaToPoint = abs(nextLocation->y - robotLocation->y);
+
 		float distanceToPoint = distance(robotLocation, nextLocation);
 		float neededYaw = acos(yDeltaToPoint / distanceToPoint);
 
 		double radYaw;
 		int quarter = getQuarter(robotLocation, nextLocation);
 		if (quarter == QUARTER_ONE){
-			radYaw = M_PI_2 - neededYaw;
+//			radYaw = M_PI_2 - neededYaw;
+			radYaw = neededYaw;
 		}
 		else if(quarter == QUARTER_TWO)
 		{
 			radYaw = M_PI - neededYaw;
 		}
 		else if (quarter == QUARTER_THREE){
-			radYaw = M_PI + M_PI_2 - neededYaw;
+//			radYaw = M_PI + M_PI_2 - neededYaw;
+			radYaw = M_PI + neededYaw;
 		}
 		else{
 			radYaw = M_PI * 2 - neededYaw;
@@ -42,17 +45,29 @@ double AngleHelper::distance(Location* robotLocation, Location* nextLocation){
 }
 
 int AngleHelper::getQuarter(Location* initialLoc, Location* nextLoc) {
-	if (initialLoc->y > nextLoc->y) {
-		if (initialLoc->x > nextLoc->x)
-			return QUARTER_TWO;
-		else
-			return QUARTER_ONE;
-	}
-	else {
-		if (initialLoc->x > nextLoc->x)
-			return QUARTER_THREE;
-		else
-			return QUARTER_FOUR;
+//	if (initialLoc->y > nextLoc->y) {
+//		if (initialLoc->x > nextLoc->x)
+//			return QUARTER_TWO;
+//		else
+//			return QUARTER_ONE;
+//	}
+//	else {
+//		if (initialLoc->x > nextLoc->x)
+//			return QUARTER_THREE;
+//		else
+//			return QUARTER_FOUR;
+
+	if (initialLoc->x > nextLoc->x) {
+			if (initialLoc->y > nextLoc->y)
+				return QUARTER_TWO;
+			else
+				return QUARTER_ONE;
+		}
+		else {
+			if (initialLoc->y > nextLoc->y)
+				return QUARTER_THREE;
+			else
+				return QUARTER_FOUR;
 	}
 }
 

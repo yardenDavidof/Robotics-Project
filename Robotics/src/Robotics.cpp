@@ -24,13 +24,15 @@ int main() {
 	GridMap weightGrid( map.getMapWidth(), map.getMapHight());
 	weightGrid.convertMapToGrid(map.getWeightMap());
 
+	cout << "gridHright " << weightGrid.getGridHeight() << " gridWidth " << originGrid.getGridWidth() << endl;
+
 	Location* start = ConfigurationManager::getInstance()->getStartLocationInGrid()->getLocation();
 	Location* goal = ConfigurationManager::getInstance()->getGoalLocationInGrid();
 
 	RoutePlanManager* plan = new RoutePlanManager();
 	vector<Location> path = plan->a_star_search(weightGrid,start,goal);
 
-//	cout<<"weight grid h " << weightGrid.getGridHeight() << " - " << weightGrid.getGridWidth()<<endl;
+//	cout<<"weight grid h " << weightGrid.getGridHeigIht() << " - " << weightGrid.getGridWidth()<<endl;
 //	cout<<"origin grid h " << originGrid.getGridHeight() << " - " << originGrid.getGridWidth()<<endl;
 	ILadyRobot ladyRobot("localhost", 6665, originGrid.getGridHeight(), originGrid.getGridWidth());
 	WaypointManeger manager(path, &ladyRobot, &originGrid);

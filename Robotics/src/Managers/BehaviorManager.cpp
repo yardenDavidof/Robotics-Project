@@ -9,30 +9,52 @@
 
 BehaviorManager::BehaviorManager(ILadyRobot* ladyRobot, ParticleManager* particleManager):ladyRobot(ladyRobot), particleManager(particleManager) {}
 
-void BehaviorManager::turnLeft(double yaw, double startRobotYaw){
+void BehaviorManager::turnLeft(double yaw, double startRobotYaw, double nextYaw){
 	ladyRobot->read();
-	cout<< "yaw to go " << yaw<<"last yaw "<< startRobotYaw<< endl;
-		cout << "the yaw!!! "<< (yaw - startRobotYaw)*2/1.75 << endl;
+	cout<< "yaw to go " << yaw<<" last yaw "<< startRobotYaw<< endl;
 //	while (ladyRobot->getYaw() < startRobotYaw +yaw){
 	//todo: think how to combine the kaka
-	while (ladyRobot->getYaw() < (yaw - startRobotYaw)*2/1.75){
-//		cout<<ladyRobot->getYaw()<<endl;
-		ladyRobot->setSpeed(TURN_SPEED, ROTATE_TURN_SPEED);
+//	while (ladyRobot->getYaw() < (yaw - startRobotYaw)){//*2/1.75){
+	double normalizedAngle = normalizeYaw(yaw, nextYaw);
+	ladyRobot->setSpeed(TURN_SPEED, ROTATE_TURN_SPEED);
+	while (ladyRobot->getYaw() < normalizedAngle){
+//		cout<<ladyRobot->getYaw`()<<endl;
 		ladyRobot->read();
-
 	}
+
 	ladyRobot->setSpeed(0,0);
+	ladyRobot->read();
+	cout << "the yaw!!! "<< ladyRobot->getYaw() << endl;
 	cout<<"finish turn left"<<endl;
 }
 
-void BehaviorManager::turnRight(double yaw, double startRobotYaw){
+void BehaviorManager::turnRight(double yaw, double startRobotYaw, double nextYaw){
 	ladyRobot->read();
 //	while (ladyRobot->getYaw() > startRobotYaw - yaw){
-	while (ladyRobot->getYaw() > yaw - startRobotYaw ){
-		ladyRobot->setSpeed(TURN_SPEED, -ROTATE_TURN_SPEED);
+	double normalizedAngle = normalizeYaw(yaw, nextYaw);
+	ladyRobot->setSpeed(TURN_SPEED, -ROTATE_TURN_SPEED);
+	while (ladyRobot->getYaw() > normalizedAngle){
+
 		ladyRobot->read();
 	}
 	ladyRobot->setSpeed(0,0);
+
+	cout << "the yaw!!! "<< ladyRobot->getYaw() << endl;
+		cout<<"finish turn right"<<endl;
+}
+
+double BehaviorManager::normalizeYaw(double currentYaw, double nextYaw){
+		if (nextYaw < currentYaw ){
+			return UP_NORMALIZE * currentYaw;
+		}
+		return DOWN_NORMALIZE * currentYaw;
+}
+
+double BehaviorManager::normalizeYawRight(double currentYaw, double nextYaw){
+		if (nextYaw > currentYaw ){
+			return UP_NORMALIZE * currentYaw;
+		}
+		return DOWN_NORMALIZE * currentYaw;
 }
 
 void BehaviorManager::goForward(Position* probRobotPos, Location* nextLocation){
@@ -42,7 +64,7 @@ void BehaviorManager::goForward(Position* probRobotPos, Location* nextLocation){
 	Position* deltaPosition = ladyRobot->getPosition()->delta(new Position(nextLocation->x, nextLocation->y, 0));
 
 
-	while( deltaPosition->getX() >25 || deltaPosition->getY() > 25){
+	while( deltaPosition->getX() >8 || deltaPosition->getY() > 8){
 		Position* prevPos = ladyRobot->getPosition();
 		cout << "x Particle " << probRobotPos->getX() << " y Particle " << probRobotPos->getY() << endl;// << " yaw robotP " << probRobotPos->getYaw() << endl;
 		cout << "x  delta " << deltaPosition->getX() << " y delta " << deltaPosition->getY() << endl;

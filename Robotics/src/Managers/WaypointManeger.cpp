@@ -32,8 +32,18 @@ void WaypointManeger::run(){
 
 	while (currentWaypoint < filteredWaypoints.size()) {
 
+		bool isGetToWaypoint;
 //		cout<< "x: " << positionStart->getX() << " y: " << positionStart->getY()<<endl;
-		if(driver->letsGo(&filteredWaypoints[currentWaypoint], positionStart)){
+		if (currentWaypoint + 1 < filteredWaypoints.size()){
+			 isGetToWaypoint = driver->letsGo(&filteredWaypoints[currentWaypoint],&filteredWaypoints[currentWaypoint + 1 ] , positionStart);
+		}
+		else
+		{
+			 isGetToWaypoint = driver->letsGo(&filteredWaypoints[currentWaypoint], &filteredWaypoints[currentWaypoint],  positionStart);
+		}
+
+
+		if(isGetToWaypoint){
 			cout<<"curent wp " << currentWaypoint<<endl;
 			currentWaypoint++;
 		}
@@ -42,7 +52,9 @@ void WaypointManeger::run(){
 
 		particleManager->updateAll(positionStart->delta(behaviorManager->getLadyRobot()->getPosition()), readings, &filteredWaypoints[currentWaypoint]);
 
-		positionStart = particleManager->GetProbablyPosition();
+//		positionStart = particleManager->GetProbablyPosition();
+		behaviorManager->getLadyRobot()->read();
+		positionStart = behaviorManager->getLadyRobot()->getPosition();
 	}
 }
 

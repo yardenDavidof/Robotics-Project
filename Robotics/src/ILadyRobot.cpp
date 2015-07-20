@@ -1,14 +1,18 @@
 #include "ILadyRobot.h"
 
 ILadyRobot::ILadyRobot(char* ip, int port, int gridHeight, int gridWidth){
-	gridHeightCM = gridHeight * 10;
-	gridWidthCM = gridWidth * 10;
+	this->gridHeight = gridHeight;
+	this->gridWidth = gridWidth;
 	playerClient = new PlayerClient(ip, port);
 	laser = new LaserProxy(playerClient);
 	position2dProxy = new Position2dProxy(playerClient);
 	position2dProxy->SetMotorEnable(true);
-	Position* startPos = ConfigurationManager::getInstance()->getStartLocation();
-	position2dProxy->SetOdometry(startPos->getX()*0.025, startPos->getY()*0.025, dtor(startPos->getYaw()));
+	Position* startPosInGrid = ConfigurationManager::getInstance()->getStartLocationInGrid();
+//	position2dProxy->SetOdometry(startPos->getX()*0.025, startPos->getY()*0.025, dtor(startPos->getYaw()));
+//	position2dProxy->SetOdometry((-gridHeight + startPos->getY()*0.025) , (gridWidth- startPos->getX()*0.025), dtor(startPos->getYaw()));
+	Position* startPosInCartezian =MatrixToCartezianCor(startPosInGrid);
+	position2dProxy->SetOdometry(startPosInCartezian->getX() / 10, startPosInCartezian->getY() / 10, dtor(startPosInCartezian->getYaw()));
+
 	cleanCache();
 }
 
@@ -17,10 +21,16 @@ Position2dProxy* ILadyRobot::getPosition2DProxy(){
 	return position2dProxy;
 }
 
-Position* ILadyRobot::delegateToMatrix(Position* proxyPosition){
-	Position* matrixPosition = new Position( proxyPosition->getX(), - gridHeightCM/10 +  proxyPosition->getY(), proxyPosition->getYaw());
+Position* ILadyRobot::CartezianCorToMatrix(Position* cartezianCor){
+	Position* matrixPosition = new Position( (gridHeight-1) - cartezianCor->getY(), cartezianCor->getX() +( gridWidth - 1) , cartezianCor->getYaw());
 	return matrixPosition;
 }
+
+Position* ILadyRobot::MatrixToCartezianCor(Position* matrixPosition){
+	Position* cartizeCorPosition = new Position( -(gridWidth - 1) + matrixPosition->getY(), (gridHeight - 1) -  matrixPosition->getX(), matrixPosition->getYaw());
+	return cartizeCorPosition;
+}
+
 
 void ILadyRobot::read(){
 	playerClient->Read();
@@ -43,8 +53,13 @@ double ILadyRobot::getYPosition(){
 
 Position* ILadyRobot::getPosition(){
 	read();
-	Position* positionProxyCM = new Position(getXPosition() * 10, getYPosition() * 10, getYaw() * 10);
-	return delegateToMatrix(positionProxyCM);
+	Position* positionProxyCM = new Position((getXPosition())*10 , (getYPosition()) * 10 ,  getYaw() );
+	return(CartezianCorToMatrix(positionProxyCM));
+//	(-gridWidth + startPos->getY())*0.025 , (gridHeight- startPos->getX())*0.025, dtor(startPos->getYaw())
+//	Position* positionProxyCM = new Position(getXPosition() * 10, getYPosition() * 10, getYaw() * 10);
+
+//	return delegateToMatrix(positionProxyCM);
+//	return positionProxyCM;
 }
 
 void ILadyRobot::setSpeed(double speed, double yaw){

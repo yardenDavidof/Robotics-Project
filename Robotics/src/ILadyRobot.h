@@ -27,9 +27,11 @@ private:
 	PlayerClient* playerClient;
 	Position2dProxy* position2dProxy;
 	LaserProxy* laser;
-	int gridHeightCM;
-	int gridWidthCM;
+	int gridHeight;
+	int gridWidth;
 	void cleanCache();
+	Position* CartezianCorToMatrix(Position* cartezianCor);
+	Position* MatrixToCartezianCor(Position* matrixPosition);
 
 public:
 	ILadyRobot(char* ip, int port, int gridHeight, int gridWidth);

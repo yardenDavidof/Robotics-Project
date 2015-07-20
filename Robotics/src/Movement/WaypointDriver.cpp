@@ -9,18 +9,20 @@
 
 WaypointDriver::WaypointDriver(BehaviorManager * manager):behaviorManager(manager) {}
 
-bool WaypointDriver::letsGo(Location* nextLocation, Position* probRobotPos){
+bool WaypointDriver::letsGo(Location* nextLocation, Location* nextNextLocation,  Position* probRobotPos){
 
 	cout<< "robotloc " << probRobotPos->getX() << " " << probRobotPos->getY()<<endl;
 	//calc angles
+	double currentYaw = behaviorManager->getLadyRobot()->getYaw();
 	double yaw = AngleHelper::angleToMove(probRobotPos->getLocation(), nextLocation);
+	double nextYaw = AngleHelper::angleToMove(nextLocation, nextNextLocation);
 	cout<<"yaww " << yaw<<endl;
 	bool isArriveToPoint = false;
 
 	// TODO put in function && remove yaw =0
-	 if(yaw <= 0)
+	 if(yaw-currentYaw < 0)
 	{
-		behaviorManager->turnRight(yaw, dtor(probRobotPos->getYaw()));
+		behaviorManager->turnRight(yaw, dtor(probRobotPos->getYaw()), nextYaw);
 		behaviorManager->goForward(probRobotPos, nextLocation);
 //				Position* deltaPosition = probRobotPos->delta(new Position(nextLocation->x, nextLocation->y, 0));
 //				cout << "x " << deltaPosition->getX() << " y " << deltaPosition->getY() << endl;
@@ -30,7 +32,7 @@ bool WaypointDriver::letsGo(Location* nextLocation, Position* probRobotPos){
 //				}
 	}
 	else {
-		behaviorManager->turnLeft(yaw, dtor(probRobotPos->getYaw()));
+		behaviorManager->turnLeft(yaw, dtor(probRobotPos->getYaw()), nextYaw);
 		behaviorManager->goForward(probRobotPos, nextLocation);
 //				Position* deltaPosition = probRobotPos->delta(new Position(nextLocation->x, nextLocation->y, 0));
 //				cout << "x " << deltaPosition->getX() << " y " << deltaPosition->getY() << endl;
