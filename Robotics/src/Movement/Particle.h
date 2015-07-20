@@ -1,16 +1,7 @@
-/*
- * Particle.h
- *
- *  Created on: May 30, 2015
- *      Author: colman
- */
-
 #ifndef PARTICLE_H_
 #define PARTICLE_H_
-//#include "../Utils/Position.h"
 #include "../ILadyRobot.h"
 #include "../Utils/GridMap.h"
-//#include "../Movement/WaypointDriver.h"
 
 #include <cmath>
 #include <math.h>
@@ -57,4 +48,4 @@ public:
 	virtual bool operator<(const Particle& secondParticle) const;
 };
 
-#endif /* PARTICLE_H_ */
+#endif

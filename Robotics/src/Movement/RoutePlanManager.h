@@ -1,10 +1,3 @@
-/*
- * RoutePlaManager.h
- *
- *  Created on: Jun 16, 2015
- *      Author: colman
- */
-
 #ifndef ROUTEPLANMANAGER_H_
 #define ROUTEPLANMANAGER_H_
 
@@ -17,7 +10,6 @@
 using namespace std;
 
 class RoutePlanManager {
-
 public:
 	RoutePlanManager();
 	int heuristic(Location* first, Location* second);
@@ -28,4 +20,4 @@ public:
 	virtual ~RoutePlanManager();
 };
 
-#endif /* ROUTEPLAMANAGER_H_ */
+#endif

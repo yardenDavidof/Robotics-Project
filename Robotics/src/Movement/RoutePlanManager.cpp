@@ -1,14 +1,6 @@
-/*
- * RoutePlaManager.cpp
- *
- *  Created on: Jun 16, 2015
- *      Author: colman
- */
-
 #include "RoutePlanManager.h"
 
-RoutePlanManager::RoutePlanManager() {
-}
+RoutePlanManager::RoutePlanManager() {}
 
 
 int RoutePlanManager::heuristic(Location* first, Location* second){
@@ -52,8 +44,6 @@ vector<Location> RoutePlanManager::a_star_search(GridMap grid, Location* start, 
 	  return vector<Location>();
 }
 
-
-// TODO - delete
 void RoutePlanManager::printCameFrom(map<Location,Location*>& came_from){
 	for(map<Location, Location* >::const_iterator it = came_from.begin();it != came_from.end(); ++it)
 		{
@@ -75,12 +65,10 @@ vector<Location> RoutePlanManager::reconstruct_path(Location* start, Location* g
   path.push_back(current);
 
   while (current != *start) {
-	// TODO - why cant find
 	current = *getValue(came_from,current);
     path.push_back(current);
   }
   return path;
 }
 
-RoutePlanManager::~RoutePlanManager() {
-}
+RoutePlanManager::~RoutePlanManager() {}
