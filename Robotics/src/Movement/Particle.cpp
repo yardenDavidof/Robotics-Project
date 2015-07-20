@@ -117,7 +117,7 @@ void Particle::Update(Position* delta,double laser[], GridMap* grid, Location* n
 	//	position->setYaw(position->getYaw() + modDouble(delta->getYaw(), 360));
 
 	setPositionDelta(nextLocation, delta);
-	cout << "position->getY() : " << position->getY() << " delta->getY() " << delta->getY() << endl;
+//	cout << "position->getY() : " << position->getY() << " delta->getY() " << delta->getY() << endl;
 
 
 }

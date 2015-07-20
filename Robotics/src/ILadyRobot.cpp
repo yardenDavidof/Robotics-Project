@@ -1,6 +1,8 @@
 #include "ILadyRobot.h"
 
-ILadyRobot::ILadyRobot(char* ip, int port){
+ILadyRobot::ILadyRobot(char* ip, int port, int gridHeight, int gridWidth){
+	gridHeightCM = gridHeight * 10;
+	gridWidthCM = gridWidth * 10;
 	playerClient = new PlayerClient(ip, port);
 	laser = new LaserProxy(playerClient);
 	position2dProxy = new Position2dProxy(playerClient);
@@ -11,7 +13,13 @@ ILadyRobot::ILadyRobot(char* ip, int port){
 }
 
 Position2dProxy* ILadyRobot::getPosition2DProxy(){
+	read();
 	return position2dProxy;
+}
+
+Position* ILadyRobot::delegateToMatrix(Position* proxyPosition){
+	Position* matrixPosition = new Position( proxyPosition->getX(), - gridHeightCM/10 +  proxyPosition->getY(), proxyPosition->getYaw());
+	return matrixPosition;
 }
 
 void ILadyRobot::read(){
@@ -19,19 +27,24 @@ void ILadyRobot::read(){
 }
 
 double ILadyRobot::getYaw(){
+	read();
 	return position2dProxy->GetYaw();
 }
 
 double ILadyRobot::getXPosition(){
+	read();
 	return position2dProxy->GetXPos();
 }
 
 double ILadyRobot::getYPosition(){
+	read();
 	return position2dProxy->GetYPos();
 }
 
 Position* ILadyRobot::getPosition(){
-	return new Position(getXPosition(), getYPosition(), getYaw());
+	read();
+	Position* positionProxyCM = new Position(getXPosition() * 10, getYPosition() * 10, getYaw() * 10);
+	return delegateToMatrix(positionProxyCM);
 }
 
 void ILadyRobot::setSpeed(double speed, double yaw){

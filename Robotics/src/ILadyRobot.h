@@ -14,6 +14,8 @@
 #include <libplayerc++/playerc++.h>
 #include "Utils/Position.h"
 #include  "Managers/ConfigurationManager.h"
+#include <cmath>
+#include <math.h>
 
 using namespace std;
 using namespace PlayerCc;
@@ -25,10 +27,13 @@ private:
 	PlayerClient* playerClient;
 	Position2dProxy* position2dProxy;
 	LaserProxy* laser;
+	int gridHeightCM;
+	int gridWidthCM;
 	void cleanCache();
 
 public:
-	ILadyRobot(char* ip, int port);
+	ILadyRobot(char* ip, int port, int gridHeight, int gridWidth);
+	Position* delegateToMatrix(Position* proxyPosition);
 	void read();
 	double getYaw();
 	double getXPosition();

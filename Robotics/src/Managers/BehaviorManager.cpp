@@ -11,6 +11,8 @@ BehaviorManager::BehaviorManager(ILadyRobot* ladyRobot, ParticleManager* particl
 
 void BehaviorManager::turnLeft(double yaw, double startRobotYaw){
 	ladyRobot->read();
+	cout<< "yaw to go " << yaw<<"last yaw "<< startRobotYaw<< endl;
+		cout << "the yaw!!! "<< (yaw - startRobotYaw)*2/1.75 << endl;
 //	while (ladyRobot->getYaw() < startRobotYaw +yaw){
 	//todo: think how to combine the kaka
 	while (ladyRobot->getYaw() < (yaw - startRobotYaw)*2/1.75){
@@ -20,6 +22,7 @@ void BehaviorManager::turnLeft(double yaw, double startRobotYaw){
 
 	}
 	ladyRobot->setSpeed(0,0);
+	cout<<"finish turn left"<<endl;
 }
 
 void BehaviorManager::turnRight(double yaw, double startRobotYaw){
@@ -35,23 +38,30 @@ void BehaviorManager::turnRight(double yaw, double startRobotYaw){
 void BehaviorManager::goForward(Position* probRobotPos, Location* nextLocation){
 	double readings[READINGS_NUM];
 	ladyRobot->read();
-	Position* deltaPosition = probRobotPos->delta(new Position(nextLocation->x, nextLocation->y, 0));
-	while( deltaPosition->getX() >20 || deltaPosition->getY() > 20){
+//	Position* deltaPosition = probRobotPos->delta(new Position(nextLocation->x, nextLocation->y, 0));
+	Position* deltaPosition = ladyRobot->getPosition()->delta(new Position(nextLocation->x, nextLocation->y, 0));
+
+
+	while( deltaPosition->getX() >25 || deltaPosition->getY() > 25){
 		Position* prevPos = ladyRobot->getPosition();
-		cout << "x robotParticle" << probRobotPos->getX() << " y robotParticle" << probRobotPos->getY() << " yaw robotP " << probRobotPos->getYaw() << endl;
-		cout << "x  delta" << deltaPosition->getX() << " y delta" << deltaPosition->getY() << endl;
+		cout << "x Particle " << probRobotPos->getX() << " y Particle " << probRobotPos->getY() << endl;// << " yaw robotP " << probRobotPos->getYaw() << endl;
+		cout << "x  delta " << deltaPosition->getX() << " y delta " << deltaPosition->getY() << endl;
 		ladyRobot->setSpeed(WALKING_SPEED,ROTATE_WALKING_SPEED);
 		ladyRobot->read();//57.2957795
 		read(readings);
-		Position* po = new Position(ladyRobot->getXPosition()*10, ladyRobot->getYPosition()*10, ladyRobot->getYaw()*57.2957795);
+		Position* po = ladyRobot->getPosition();
 //		particleManager->updateAll(po->delta(probRobotPos), readings , nextLocation);
 		particleManager->updateAll(prevPos->delta(ladyRobot->getPosition()), readings , nextLocation);
 
 //		cout << "x  ladyProxy" << ladyRobot->getPosition()->getX() << " y ladyProxy" << ladyRobot->getPosition()->getY() << " yaw ladyProxy" << ladyRobot->getYaw() <<endl;
-		cout << "x  Proxy i cm" << po->getX() << " y proxy in cm" << po->getY() << " yaw in deg" << po->getYaw() <<endl << endl;
+		cout << "x  Proxy " << po->getX() << " y proxy " << po->getY() << " yaw in deg" << po->getYaw() <<endl << endl;
+		cout << "x  realProxy " << ladyRobot->getPosition2DProxy()->GetXPos() << " y realproxy " << ladyRobot->getPosition2DProxy()->GetYPos() <<endl << endl;
 
+		ladyRobot->read();
 
-		probRobotPos = particleManager->GetProbablyPosition();
+//		probRobotPos = particleManager->GetProbablyPosition();
+		probRobotPos = ladyRobot->getPosition();
+
 		//todo: yaw= location calc yaw-> calc beforev changes
 		deltaPosition = probRobotPos->delta(new Position(nextLocation->x, nextLocation->y, 0));
 	}

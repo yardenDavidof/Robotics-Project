@@ -32,7 +32,7 @@ int main() {
 
 //	cout<<"weight grid h " << weightGrid.getGridHeight() << " - " << weightGrid.getGridWidth()<<endl;
 //	cout<<"origin grid h " << originGrid.getGridHeight() << " - " << originGrid.getGridWidth()<<endl;
-	ILadyRobot ladyRobot("localhost", 6665);
+	ILadyRobot ladyRobot("localhost", 6665, originGrid.getGridHeight(), originGrid.getGridWidth());
 	WaypointManeger manager(path, &ladyRobot, &originGrid);
 	manager.run();
 	weightGrid.drawGrid(path);
