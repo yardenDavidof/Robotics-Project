@@ -65,7 +65,7 @@ void BehaviorManager::goForward(Position* probRobotPos, Location* nextLocation){
 
 	ladyRobot->setSpeed(WALKING_SPEED,ROTATE_WALKING_SPEED);
 
-	while( deltaPosition->getX() >10 || deltaPosition->getY() > 10){
+	while( deltaPosition->getX() > 10 || deltaPosition->getY() > 10){
 
 //		Position* prevPos = ladyRobot->getPosition();
 		Position* prevPos = particleManager->GetProbablyPosition();
