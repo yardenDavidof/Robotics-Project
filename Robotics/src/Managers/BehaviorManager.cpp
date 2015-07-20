@@ -63,21 +63,21 @@ void BehaviorManager::goForward(Position* probRobotPos, Location* nextLocation){
 //	Position* deltaPosition = probRobotPos->delta(new Position(nextLocation->x, nextLocation->y, 0));
 	Position* deltaPosition = ladyRobot->getPosition()->delta(new Position(nextLocation->x, nextLocation->y, 0));
 
+	ladyRobot->setSpeed(WALKING_SPEED,ROTATE_WALKING_SPEED);
 
-	while( deltaPosition->getX() >8 || deltaPosition->getY() > 8){
+	while( deltaPosition->getX() >10 || deltaPosition->getY() > 10){
 		Position* prevPos = ladyRobot->getPosition();
-		cout << "x Particle " << probRobotPos->getX() << " y Particle " << probRobotPos->getY() << endl;// << " yaw robotP " << probRobotPos->getYaw() << endl;
-		cout << "x  delta " << deltaPosition->getX() << " y delta " << deltaPosition->getY() << endl;
-		ladyRobot->setSpeed(WALKING_SPEED,ROTATE_WALKING_SPEED);
-		ladyRobot->read();//57.2957795
+//		cout << "x Particle " << probRobotPos->getX() << " y Particle " << probRobotPos->getY() << endl;// << " yaw robotP " << probRobotPos->getYaw() << endl;
+//		cout << "x  delta " << deltaPosition->getX() << " y delta " << deltaPosition->getY() << endl;
+//		ladyRobot->read();//57.2957795
 		read(readings);
-		Position* po = ladyRobot->getPosition();
+//		Position* po = ladyRobot->getPosition();
 //		particleManager->updateAll(po->delta(probRobotPos), readings , nextLocation);
 		particleManager->updateAll(prevPos->delta(ladyRobot->getPosition()), readings , nextLocation);
 
 //		cout << "x  ladyProxy" << ladyRobot->getPosition()->getX() << " y ladyProxy" << ladyRobot->getPosition()->getY() << " yaw ladyProxy" << ladyRobot->getYaw() <<endl;
-		cout << "x  Proxy " << po->getX() << " y proxy " << po->getY() << " yaw in deg" << po->getYaw() <<endl << endl;
-		cout << "x  realProxy " << ladyRobot->getPosition2DProxy()->GetXPos() << " y realproxy " << ladyRobot->getPosition2DProxy()->GetYPos() <<endl << endl;
+//		cout << "x  Proxy " << po->getX() << " y proxy " << po->getY() << " yaw in deg" << po->getYaw() <<endl << endl;
+//		cout << "x  realProxy " << ladyRobot->getPosition2DProxy()->GetXPos() << " y realproxy " << ladyRobot->getPosition2DProxy()->GetYPos() <<endl << endl;
 
 		ladyRobot->read();
 
