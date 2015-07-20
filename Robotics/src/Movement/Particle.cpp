@@ -85,17 +85,17 @@ void Particle::setPositionDelta(Location* nextLocation, Position* delta){
 		case QUARTER_TWO:
 		{
 			finalDeltaX = -finalDeltaX;
+			finalDeltaY = -finalDeltaY;
 			break;
 		}
 		case QUARTER_THREE:
 		{
-			finalDeltaX = -finalDeltaX;
 			finalDeltaY = -finalDeltaY;
 			break;
 		}
-		case QUARTER_FOUR:
+		case QUARTER_ONE:
 		{
-			finalDeltaY = -finalDeltaY;
+			finalDeltaX = -finalDeltaX;
 			break;
 		}
 	}

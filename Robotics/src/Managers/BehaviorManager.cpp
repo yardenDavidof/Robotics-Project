@@ -66,9 +66,12 @@ void BehaviorManager::goForward(Position* probRobotPos, Location* nextLocation){
 	ladyRobot->setSpeed(WALKING_SPEED,ROTATE_WALKING_SPEED);
 
 	while( deltaPosition->getX() >10 || deltaPosition->getY() > 10){
-		Position* prevPos = ladyRobot->getPosition();
-//		cout << "x Particle " << probRobotPos->getX() << " y Particle " << probRobotPos->getY() << endl;// << " yaw robotP " << probRobotPos->getYaw() << endl;
-//		cout << "x  delta " << deltaPosition->getX() << " y delta " << deltaPosition->getY() << endl;
+
+//		Position* prevPos = ladyRobot->getPosition();
+		Position* prevPos = particleManager->GetProbablyPosition();
+		cout << "x Proxy " << ladyRobot->getPosition()->getX() << " y Proxy " << ladyRobot->getPosition()->getY() << endl;
+		cout << "x Particle " << probRobotPos->getX() << " y Particle " << probRobotPos->getY() << endl;// << " yaw robotP " << probRobotPos->getYaw() << endl;
+		cout << "x  delta " << deltaPosition->getX() << " y delta " << deltaPosition->getY() << endl << endl;
 //		ladyRobot->read();//57.2957795
 		read(readings);
 //		Position* po = ladyRobot->getPosition();
@@ -81,8 +84,7 @@ void BehaviorManager::goForward(Position* probRobotPos, Location* nextLocation){
 
 		ladyRobot->read();
 
-//		probRobotPos = particleManager->GetProbablyPosition();
-		probRobotPos = ladyRobot->getPosition();
+		probRobotPos = particleManager->GetProbablyPosition();
 
 		//todo: yaw= location calc yaw-> calc beforev changes
 		deltaPosition = probRobotPos->delta(new Position(nextLocation->x, nextLocation->y, 0));

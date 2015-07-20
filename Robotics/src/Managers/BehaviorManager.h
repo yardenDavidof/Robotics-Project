@@ -13,7 +13,7 @@
 #define TURN_SPEED 0
 #define WALKING_SPEED 0.2
 #define UP_NORMALIZE 1.1
-#define DOWN_NORMALIZE 0.983
+#define DOWN_NORMALIZE 0.9825
 
 #include "../ILadyRobot.h"
 #include "../Movement/ParticleManager.h"

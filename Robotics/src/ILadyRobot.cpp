@@ -67,8 +67,9 @@ void ILadyRobot::setSpeed(double speed, double yaw){
 }
 
 void ILadyRobot::cleanCache() {
-	for(int i = 0; i < 15; i++){
+	for(int i = 0; i < 30; i++){
 		playerClient->Read();
+		read();
 	}
 }
 
