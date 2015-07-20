@@ -1,10 +1,3 @@
-/*
- * ConfigurationManager.h
- *
- *  Created on: Jun 9, 2015
- *      Author: colman
- */
-
 #ifndef CONFIGURATIONMANAGER_H_
 #define CONFIGURATIONMANAGER_H_
 
@@ -12,6 +5,7 @@
 #include <iostream>
 #include <cstring>
 #include <map>
+
 #include <unistd.h>
 #include <stdlib.h>
 #include "../Utils/Location.h"
@@ -25,7 +19,6 @@ private:
 	map<string, string> dataMap;
 	Location* getGoalLocation();
 	ConfigurationManager();
-
 	void readConfFile();
 public:
 	static ConfigurationManager* getInstance();
@@ -37,8 +30,7 @@ public:
 	double getGridResolutionCM();
 	Position* getStartLocationInGrid();
 	Location* getGoalLocationInGrid();
-
 	virtual ~ConfigurationManager();
 };
 
-#endif /* CONFIGURATIONMANAGER_H_ */
+#endif

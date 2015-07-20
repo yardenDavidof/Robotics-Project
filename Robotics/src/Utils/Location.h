@@ -1,16 +1,8 @@
-/*
- * Location.h
- *
- *  Created on: Jun 26, 2015
- *      Author: colman
- */
-
 #ifndef LOCATION_H_
 #define LOCATION_H_
 
 class Location {
 public:
-
 	double x;
 	double y;
 
@@ -32,8 +24,6 @@ public:
 		return false;
 	}
 
-
-	// TODO const ?
 	bool operator< (const Location& loc) const{
 		if(x + y <= loc.x + loc.y)
 			return true;
@@ -41,4 +31,4 @@ public:
 	}
 };
 
-#endif /* LOCATION_H_ */
+#endif

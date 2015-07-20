@@ -1,21 +1,14 @@
-/*
- * GridMap.h
- *
- *  Created on: Jun 16, 2015
- *      Author: colman
- */
-
 #ifndef GRIDMAP_H_
 #define GRIDMAP_H_
 
 #include <iostream>
-#include "Location.h"
 #include <vector>
+
+#include "Location.h"
 #include "../Managers/ConfigurationManager.h"
 
 using namespace std;
 
-// TODO - weight of cells
 class GridMap {
 private:
 	int mapWidth;
@@ -29,9 +22,9 @@ public:
 	static const int VISITED_CELL = 3;
 
 	const  int RESOLUTION = ConfigurationManager::getInstance()->getGridResolutionCM()/ ConfigurationManager::getInstance()->getMapResolutionCM();
+
 	int** gridMap;
 	GridMap(int mapWidth, int mapHight);
-	GridMap();
 	int getGridWidth();
 	int getGridHeight();
 	int getMapWidth();
@@ -43,8 +36,7 @@ public:
 	void drawGrid(vector<Location> path);
 	void setCellVisited(Location* location);
 	bool isCellVisited(Location* location);
-
 	virtual ~GridMap();
 };
 
-#endif /* GRIDMAP_H_ */
+#endif

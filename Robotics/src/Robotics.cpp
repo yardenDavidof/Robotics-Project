@@ -1,10 +1,3 @@
-//============================================================================
-// Name        : Robotics.cpp
-// Author      :
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
-//============================================================================
 
 #include <iostream>
 #include "Managers/ConfigurationManager.h"
@@ -15,6 +8,9 @@
 #include "Managers/WaypointManeger.h"
 using namespace std;
 
+/**
+ * The main for running the robot
+ */
 int main() {
 	Map map;
 	map.readPNG();
@@ -32,8 +28,6 @@ int main() {
 	RoutePlanManager* plan = new RoutePlanManager();
 	vector<Location> path = plan->a_star_search(weightGrid,start,goal);
 
-//	cout<<"weight grid h " << weightGrid.getGridHeigIht() << " - " << weightGrid.getGridWidth()<<endl;
-//	cout<<"origin grid h " << originGrid.getGridHeight() << " - " << originGrid.getGridWidth()<<endl;
 	ILadyRobot ladyRobot("localhost", 6665, originGrid.getGridHeight(), originGrid.getGridWidth());
 	WaypointManeger manager(path, &ladyRobot, &originGrid);
 	manager.run();

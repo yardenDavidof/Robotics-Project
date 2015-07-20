@@ -24,10 +24,7 @@ private:
 public:
 	WaypointDriver(BehaviorManager* manager);
 	static int getQuarter(Location* initialLoc, Location* nextLoc);
-	bool letsGo(  Location* nextLocation, Location* nextNextLocation, Position* robotPosition);
-	static double modDoubles(double first, double second);
-	static double distance(Location* robotLocation, Location* nextLocation);
-	static double angleToMove(Location* robotPosition, Location* nextPosition);
+	bool letsGo(Location* nextLocation, Location* nextNextLocation, Position* robotPosition);
 	virtual ~WaypointDriver();
 };
 

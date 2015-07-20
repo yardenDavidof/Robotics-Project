@@ -1,17 +1,9 @@
-/*
- * AngleHElper.h
- *
- *  Created on: Jul 19, 2015
- *      Author: colman
- */
-
 #ifndef ANGLEHELPER_H_
 #define ANGLEHELPER_H_
 
 #include "Location.h"
 #include <cmath>
 #include <math.h>
-
 
 #define QUARTER_ONE 1
 #define QUARTER_TWO 2
@@ -29,4 +21,4 @@ public:
 	virtual ~AngleHelper();
 };
 
-#endif /* ANGLEHELPER_H_ */
+#endif

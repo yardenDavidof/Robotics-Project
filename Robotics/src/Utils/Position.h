@@ -1,15 +1,9 @@
-/*
- * Position.h
- *
- *  Created on: Jul 17, 2015
- *      Author: colman
- */
-
 #ifndef POSITION_H_
 #define POSITION_H_
 
-#include "Location.h"
 #include <cmath>
+
+#include "Location.h"
 
 using namespace std;
 
@@ -31,4 +25,4 @@ public:
 	Position* delta(Position* old);
 };
 
-#endif /* POSITION_H_ */
+#endif

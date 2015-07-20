@@ -1,52 +1,8 @@
-/*
- * MapGrid.cpp
- *
- *  Created on: Jun 16, 2015
- *      Author: colman
- */
-
 #include "GridMap.h"
 
-
-// TODO - delete (test for yarden);
-GridMap::GridMap(){
-	mapHeight = 20;
-	mapWidth = 20;
-	gridMap = new int*[mapHeight]; // num of rows
-
-	for (int i = 0; i < mapHeight; i++)
-	    gridMap[i] = new int[mapWidth];
-
-	for (int i = 0 ; i < mapHeight; i++){
-		for (int j =0 ; j < mapWidth ; j++){
-			gridMap[i][j] = FREE_CELL;
-		}
-	}
-
-	gridMap[1][2] = BLOCKED_CELL;
-	gridMap[2][2] = BLOCKED_CELL;
-	gridMap[2][1] = BLOCKED_CELL;
-//	gridMap[2][0] = BLOCKED_CELL;
-
-	gridMap[0][2] = BLOCKED_CELL;
-	gridMap[0][4] = BLOCKED_CELL;
-	gridMap[1][4] = BLOCKED_CELL;
-	gridMap[2][4] = BLOCKED_CELL;
-	gridMap[4][4] = BLOCKED_CELL;
-	gridMap[4][3] = BLOCKED_CELL;
-	gridMap[4][2] = BLOCKED_CELL;
-	gridMap[4][1] = BLOCKED_CELL;
-
-	gridMap[5][3] = BLOCKED_CELL;
-	gridMap[6][3] = BLOCKED_CELL;
-	gridMap[7][3] = BLOCKED_CELL;
-	gridMap[8][3] = BLOCKED_CELL;
-	gridMap[9][3] = BLOCKED_CELL;
-	gridMap[3][4] = BLOCKED_CELL;
-	gridMap[5][5] = BLOCKED_CELL;
-	gridMap[5][6] = BLOCKED_CELL;
-}
-
+/**
+ * Constructor of gridMap. Initial the grid
+ */
 GridMap::GridMap(int width, int height) {
 	mapHeight = height;
 	mapWidth = width;
@@ -68,14 +24,23 @@ GridMap::GridMap(int width, int height) {
 	}
 }
 
+/**
+ * The function return the grid width
+ */
 int GridMap::getGridWidth(){
 	return gridWidth;
 }
 
+/**
+ * The function return the grid height
+ */
 int GridMap::getGridHeight(){
 	return gridHeight;
 }
 
+/**
+ * The function  convert the getting map to the grid-> do the calculates according to conf file
+ */
 void GridMap::convertMapToGrid(std::vector<unsigned char> pixelMap){
 	// Passing the grid cells
 	for (int gridHeightIndex = 0; gridHeightIndex <  gridHeight; gridHeightIndex++){
@@ -102,6 +67,9 @@ void GridMap::convertMapToGrid(std::vector<unsigned char> pixelMap){
 	}
 }
 
+/**
+ * The function return the valid neighbours of the getting location
+ */
 vector<Location*> GridMap::getNeighbours(Location* location){
 	vector<Location*> neighbours;
 	for( int i = location->x - 1; i <= location->x + 1; ++i ){
@@ -116,55 +84,70 @@ vector<Location*> GridMap::getNeighbours(Location* location){
 return neighbours;
 }
 
+/**
+ * The function mark the getting location as visited
+ */
 void GridMap::setCellVisited(Location* location){
 	gridMap[(int)location->x][(int)location->y] = VISITED_CELL;
 }
 
+/**
+ * The function return if the cell is visited
+ */
 bool GridMap::isCellVisited(Location* location){
 	return gridMap[(int)location->x][(int)location->y] == VISITED_CELL;
 }
 
+/**
+ * The function return if the getting location is in bound
+ */
 bool GridMap::inBounds(Location* location){
-
-	//TODO - check height + width
-	  return 0 <= location->x && location->x < gridHeight && 0 <= location->y && location->y < gridWidth;
+  return 0 <= location->x && location->x < gridHeight && 0 <= location->y && location->y < gridWidth;
 }
 
+/**
+ * The function return if the getting location is blocked
+ */
 bool GridMap::passable(Location* location){
 	if (gridMap[(int)location->x][(int)location->y] == BLOCKED_CELL)
 			return false;
 		return true;
 }
 
+/**
+ * The function draw the path in the grid
+ */
 void GridMap::drawGrid(vector<Location> path){
 	for (unsigned i =0; i< path.size(); i++){
-			Location current = path[i];
-			gridMap[(int)current.x][(int)current.y] = PATH_CELL;
-		}
+		Location current = path[i];
+		gridMap[(int)current.x][(int)current.y] = PATH_CELL;
+	}
 
-	//TODO - check what is the height + width of grid
-		for (int i = 0; i < gridHeight; i++){
-			for (int j = 0; j < gridWidth; j++){
-				// TODO - how to clean the grid from visited cells
-				if (gridMap[i][j] == FREE_CELL || gridMap[i][j] == VISITED_CELL)
-					cout << "." << "  ";
-				else if(gridMap[i][j] == BLOCKED_CELL)
-					cout << "#" << "  ";
-				else if (gridMap[i][j] == PATH_CELL)
-					cout << "X" << "  ";
-			}
-			cout << endl;
+	for (int i = 0; i < gridHeight; i++){
+		for (int j = 0; j < gridWidth; j++){
+			if (gridMap[i][j] == FREE_CELL || gridMap[i][j] == VISITED_CELL)
+				cout << "." << "  ";
+			else if(gridMap[i][j] == BLOCKED_CELL)
+				cout << "#" << "  ";
+			else if (gridMap[i][j] == PATH_CELL)
+				cout << "X" << "  ";
 		}
+		cout << endl;
+	}
 }
 
+/**
+ * The function return the map width
+ */
 int GridMap::getMapWidth(){
 	return mapWidth;
 }
 
+/**
+ * The function return the map height
+ */
 int GridMap::getMapHeight(){
 	return mapHeight;
 }
 
-GridMap::~GridMap() {
-}
-
+GridMap::~GridMap() {}

@@ -1,19 +1,20 @@
-/*
- * PriorityQueue.cpp
- *
- *  Created on: Jun 16, 2015
- *      Author: colman
- */
-
 #include "PriorityQueue.h"
 
-PriorityQueue::PriorityQueue() {
+/**
+ * Empty constructor for PriorityQueue
+ */
+PriorityQueue::PriorityQueue() {}
 
-}
-
+/**
+ * The function check if the elements are empty
+ */
 bool PriorityQueue::isEmpty(){
 	return elements.empty();
 }
+
+/**
+ * The function put location in queue according to getting priority
+ */
 void PriorityQueue::put(Location* pos, int priority){
 	Node newNode = Node();
 	newNode.pos = pos;
@@ -21,6 +22,9 @@ void PriorityQueue::put(Location* pos, int priority){
 	elements.push(newNode);
 }
 
+/**
+ * Get the top in priority and pop
+ */
 PriorityQueue::Node PriorityQueue::get(){
 	Node node = elements.top();
 	elements.pop();
@@ -28,5 +32,4 @@ PriorityQueue::Node PriorityQueue::get(){
 }
 
 
-PriorityQueue::~PriorityQueue() {
-}
+PriorityQueue::~PriorityQueue() {}

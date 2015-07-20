@@ -1,17 +1,11 @@
-/*
- * PriorityQueue.h
- *
- *  Created on: Jun 16, 2015
- *      Author: colman
- */
-
 #ifndef PRIORITYQUEUE_H_
 #define PRIORITYQUEUE_H_
 
 #include <queue>
 #include <vector>
 #include <functional>
-#include "Location.h" //TODO use template
+
+#include "Location.h"
 
 using namespace std;
 
@@ -27,17 +21,12 @@ public:
 				return true;
 			return false;
 		}
-
 	};
 
 private:
-
 	priority_queue<Node,vector<Node>, std::greater<Node> > elements;
-
-
 public:
 	PriorityQueue();
-
 	bool isEmpty();
 	void put(Location* pos, int priority);
 	Node get();
@@ -45,4 +34,4 @@ public:
 	virtual ~PriorityQueue();
 };
 
-#endif /* PRIORITYQUEUE_H_ */
+#endif

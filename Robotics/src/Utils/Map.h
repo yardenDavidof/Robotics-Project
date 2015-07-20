@@ -1,17 +1,12 @@
-/*
- * Map.h
- *
- *  Created on: Jun 2, 2015
- *      Author: colman
- */
-
 #ifndef MAP_H_
 #define MAP_H_
 
-#include "../Helpers/lodepng.h"
-#include "../Managers/ConfigurationManager.h"
 #include <cstring>
 #include <iostream>
+
+#include "../Helpers/lodepng.h"
+#include "../Managers/ConfigurationManager.h"
+
 using namespace std;
 
 class Map {
@@ -26,10 +21,8 @@ public:
 	std::vector<unsigned char> getWeightMap();
 	unsigned getMapWidth();
 	unsigned getMapHight();
-
 	void readPNG();
-
 	virtual ~Map();
 };
 
-#endif /* MAP_H_ */
+#endif

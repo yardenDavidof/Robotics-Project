@@ -1,14 +1,9 @@
-/*
- * WaypointManeger.h
- *
- *  Created on: Jul 17, 2015
- *      Author: colman
- */
-
 #ifndef WAYPOINTMANEGER_H_
 #define WAYPOINTMANEGER_H_
 
 #include <vector>
+#include <algorithm>
+
 #include "../Utils/Location.h"
 #include "../Movement/WaypointDriver.h"
 #include "../Movement/ParticleManager.h"
@@ -16,7 +11,6 @@
 #include "../ILadyRobot.h"
 #include "../Utils/GridMap.h"
 #include "ConfigurationManager.h"
-#include <algorithm>
 
 #define READINGS_NUM 682
 #define REGULAR_SPEED 0.6
@@ -30,7 +24,6 @@ class WaypointManeger {
 	ParticleManager* particleManager;
 	BehaviorManager* behaviorManager;
 	vector<Location> filteredWaypoints;
-
 public:
 	WaypointManeger(vector<Location> path, ILadyRobot* ladyRobot, GridMap* gridMap);
 	void run();
@@ -38,4 +31,4 @@ public:
 	virtual ~WaypointManeger();
 };
 
-#endif /* WAYPOINTMANEGER_H_ */
+#endif

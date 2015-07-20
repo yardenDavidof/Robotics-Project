@@ -1,10 +1,3 @@
-/*
- * BehaviorManager.h
- *
- *  Created on: Jul 16, 2015
- *      Author: colman
- */
-
 #ifndef BEHAVIORMANAGER_H_
 #define BEHAVIORMANAGER_H_
 
@@ -23,8 +16,8 @@ using namespace PlayerCc;
 
 class BehaviorManager {
 private:
-ILadyRobot* ladyRobot;
-ParticleManager* particleManager;
+	ILadyRobot* ladyRobot;
+	ParticleManager* particleManager;
 public:
 	BehaviorManager(ILadyRobot* ladyRobot, ParticleManager* particleManager);
 	void turnRight(double yaw, double startRobotYaw, double nextYaw);
@@ -32,9 +25,8 @@ public:
 	void goForward(Position* probRobotPos, Location* nextLocation);
 	void read(double* readings);
 	double normalizeYaw(double currentYaw, double nextYaw);
-	double normalizeYawRight(double currentYaw, double nextYaw);
 	ILadyRobot* getLadyRobot();
 	virtual ~BehaviorManager();
 };
 
-#endif /* BEHAVIORMANAGER_H_ */
+#endif
